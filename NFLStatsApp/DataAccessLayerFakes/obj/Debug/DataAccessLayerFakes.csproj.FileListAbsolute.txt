@@ -31,3 +31,14 @@ D:\fall2023\dotNet\NFLStatsApp\DataAccessLayerFakes\obj\Debug\DataAccessLayerFak
 D:\fall2023\dotNet\NFLStatsApp\DataAccessLayerFakes\obj\Debug\DataAccessLayerFakes.csproj.CopyComplete
 D:\fall2023\dotNet\NFLStatsApp\DataAccessLayerFakes\obj\Debug\DataAccessLayerFakes.dll
 D:\fall2023\dotNet\NFLStatsApp\DataAccessLayerFakes\obj\Debug\DataAccessLayerFakes.pdb
+D:\fall2023\dotNet\.Net3-Final-Project\NFLStatsApp\DataAccessLayerFakes\bin\Debug\DataAccessLayerFakes.dll
+D:\fall2023\dotNet\.Net3-Final-Project\NFLStatsApp\DataAccessLayerFakes\bin\Debug\DataAccessLayerFakes.pdb
+D:\fall2023\dotNet\.Net3-Final-Project\NFLStatsApp\DataAccessLayerFakes\bin\Debug\DataAccessLayerInterfaces.dll
+D:\fall2023\dotNet\.Net3-Final-Project\NFLStatsApp\DataAccessLayerFakes\bin\Debug\DataObjects.dll
+D:\fall2023\dotNet\.Net3-Final-Project\NFLStatsApp\DataAccessLayerFakes\bin\Debug\DataAccessLayerInterfaces.pdb
+D:\fall2023\dotNet\.Net3-Final-Project\NFLStatsApp\DataAccessLayerFakes\bin\Debug\DataObjects.pdb
+D:\fall2023\dotNet\.Net3-Final-Project\NFLStatsApp\DataAccessLayerFakes\obj\Debug\DataAccessLayerFakes.csproj.AssemblyReference.cache
+D:\fall2023\dotNet\.Net3-Final-Project\NFLStatsApp\DataAccessLayerFakes\obj\Debug\DataAccessLayerFakes.csproj.CoreCompileInputs.cache
+D:\fall2023\dotNet\.Net3-Final-Project\NFLStatsApp\DataAccessLayerFakes\obj\Debug\DataAccessLayerFakes.csproj.CopyComplete
+D:\fall2023\dotNet\.Net3-Final-Project\NFLStatsApp\DataAccessLayerFakes\obj\Debug\DataAccessLayerFakes.dll
+D:\fall2023\dotNet\.Net3-Final-Project\NFLStatsApp\DataAccessLayerFakes\obj\Debug\DataAccessLayerFakes.pdb

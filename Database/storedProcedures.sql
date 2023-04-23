@@ -328,10 +328,20 @@ CREATE PROCEDURE [dbo].[sp_select_stats_by_player_id]
 )
 AS
 	BEGIN
-		SELECT	[player].[playerID], [givenName], [familyName], [active], [playerStat].[statName], [statAmount]
+		SELECT	[player].[playerID], [givenName], [familyName], [active], [playerStat].[statName], [statAmount], [playerStat].[seasonID]
 		FROM	[player] JOIN [playerStat]
 				ON [player].[playerID] = [playerStat].[playerID]
 				JOIN [stat] ON [stat].[statName] = [playerStat].[statName]
 		WHERE	@PlayerId = [player].[playerID]
+	END
+GO
+
+print '' print '*** creating sp_select_all_team_names'
+GO
+CREATE PROCEDURE [dbo].[sp_select_all_team_names]
+AS
+	BEGIN
+		SELECT	[TeamName]
+		FROM	[Team]
 	END
 GO

@@ -39,6 +39,21 @@ namespace LogicLayer
             return teams;
         }
 
+        public List<string> RetrieveAllTeamNames()
+        {
+            List<string> teamNames = null;
+
+            try
+            {
+                teamNames = _teamsAccessor.SelectAllTeamNames();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return teamNames;
+        }
+
         public Teams RetrieveTeamByTeamName(string teamName)
         {
             try

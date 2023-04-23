@@ -4,19 +4,53 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>@Model.TeamCity @Model.TeamName</h2>
 
-<div>
+
+
+<dl class="dl-horizontal">
+    <dt>
+        Team Mascot:
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.TeamMascot)
+    </dd>
+
+    <dt>
+        Team City:
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.TeamCity)
+    </dd>
+
+    <dt>
+        Team State:
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.TeamState)
+    </dd>
+
+    <dt>
+        Team Abbrivation:
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.TeamAbbrivation)
+    </dd>
+</dl>
+
+<p class="btn btn-default" style="margin: 5px;">
+    @Html.ActionLink("Back to Teams", "Index")
+</p>
+
+@*<div>
     <h4>Teams</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.TeamName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TeamName)
-        </dd>
+        
 
         <dt>
             @Html.DisplayNameFor(model => model.TeamMascot)
@@ -63,4 +97,4 @@
 <p>
     @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
     @Html.ActionLink("Back to List", "Index")
-</p>
+</p>*@

@@ -4,7 +4,7 @@
     ViewBag.Title = "PlayersOnTeam";
 }
 
-<h2>Players</h2>
+<h2>Players on the @Model.First().TeamName</h2>
 
 <p class="btn btn-default" style="margin: 5px;">
     @Html.ActionLink("Add a Player", "Create")
@@ -22,7 +22,7 @@
                         <br /> <br />
                         Year Drafted: @player.YearDrafted
                     </div>
-                    <div class="btn btn-default" style="margin: 0 0 10px 10px;">@Html.ActionLink("Stats", "Details", new { playerID = player.PlayerID })</div>
+                    <div class="btn btn-default" style="margin: 0 0 10px 10px;">@Html.ActionLink("Stats", "Details", "Stats", new { playerID = player.PlayerID }, new { @class = "" })</div>
                     <div class="btn btn-default" style="margin: 0 0 10px 10px;">@Html.ActionLink("Edit", "Edit", new { playerID = player.PlayerID })</div>
                 </div>
             </div>

@@ -12,5 +12,6 @@ namespace DataAccessLayerInterfaces
         List<Teams> SelectTeamsByActive(bool active);
         int UpdateTeam(Teams oldTeam, Teams newTeam);
         Teams SelectTeamByTeamName(string teamName);
+        List<string> SelectAllTeamNames();
     }
 }

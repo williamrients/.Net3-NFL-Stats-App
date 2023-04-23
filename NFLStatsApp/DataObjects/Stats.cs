@@ -14,5 +14,6 @@ namespace DataObjects
         public string StatName { get; set; }
         public double StatAmount { get; set; }
         public bool Active { get; set; }
+        public string SeasonID { get; set; }
     }
 }

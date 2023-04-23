@@ -12,15 +12,22 @@ namespace MVCPresentation.Controllers
     public class PlayersController : Controller
     {
         IPlayerManager _playerManager = null;
+        ITeamsManager _teamManager = null;
+        private IEnumerable<String> _teamsDDL;
 
         public PlayersController()
         {
             _playerManager = new PlayerManager();
-        }
-
-        public PlayersController(IPlayerManager playerManager)
-        {
-            _playerManager = playerManager;
+            _teamManager = new TeamManager();
+            try
+            {
+                _teamsDDL = _teamManager.RetrieveAllTeamNames();
+            }
+            catch (Exception)
+            {
+                // direct to error page
+                throw;
+            }
         }
 
         // GET: Players
@@ -40,6 +47,7 @@ namespace MVCPresentation.Controllers
         // GET: Players/Create
         public ActionResult Create()
         {
+            ViewBag.teamsDDL = _teamsDDL;
             return View();
         }
 

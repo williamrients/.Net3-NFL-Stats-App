@@ -12,5 +12,6 @@ namespace LogicLayerInterfaces
         List<Teams> GetAllTeamsByActive(bool active);
         bool UpdateTeam(Teams oldTeam, Teams newTeam);
         Teams RetrieveTeamByTeamName(string teamName);
+        List<string> RetrieveAllTeamNames();
     }
 }

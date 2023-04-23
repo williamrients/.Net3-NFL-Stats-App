@@ -4,16 +4,42 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>@Model.First().GivenName @Model.First().FamilyName's Stats</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.PlayerID)
+            Season
         </th>
+        <th>
+            Stat Name
+        </th>
+        <th>
+            Stat Amount
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SeasonID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StatName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StatAmount)
+            </td>
+        </tr>
+    }
+</table>
+
+@*<table class="table">
+    <tr>
         <th>
             @Html.DisplayNameFor(model => model.GivenName)
         </th>
@@ -34,9 +60,6 @@
 
 @foreach (var item in Model) {
     <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.PlayerID)
-        </td>
         <td>
             @Html.DisplayFor(modelItem => item.GivenName)
         </td>
@@ -60,4 +83,4 @@
     </tr>
 }
 
-</table>
+</table>*@

@@ -12,6 +12,44 @@ namespace DataAccessLayer
 {
     public class TeamsAccessor : ITeamsAccessor
     {
+        public List<string> SelectAllTeamNames()
+        {
+            List<string> teamNames = new List<string>();
+
+            var connectionFactory = new DBconnection();
+            var conn = connectionFactory.GetConnection();
+
+            var cmdText = "sp_select_all_team_names";
+
+            var cmd = new SqlCommand(cmdText, conn);
+
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            try
+            {
+                conn.Open();
+
+                var reader = cmd.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        teamNames.Add(reader.GetString(0));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return teamNames;
+        }
+
         public Teams SelectTeamByTeamName(string teamName)
         {
             Teams team = new Teams();

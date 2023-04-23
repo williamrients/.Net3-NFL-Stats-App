@@ -31,3 +31,14 @@ D:\fall2023\dotNet\NFLStatsApp\DataAccessLayer\obj\Debug\DataAccessLayer.csproj.
 D:\fall2023\dotNet\NFLStatsApp\DataAccessLayer\obj\Debug\DataAccessLayer.csproj.CopyComplete
 D:\fall2023\dotNet\NFLStatsApp\DataAccessLayer\obj\Debug\DataAccessLayer.dll
 D:\fall2023\dotNet\NFLStatsApp\DataAccessLayer\obj\Debug\DataAccessLayer.pdb
+D:\fall2023\dotNet\.Net3-Final-Project\NFLStatsApp\DataAccessLayer\bin\Debug\DataAccessLayer.dll
+D:\fall2023\dotNet\.Net3-Final-Project\NFLStatsApp\DataAccessLayer\bin\Debug\DataAccessLayer.pdb
+D:\fall2023\dotNet\.Net3-Final-Project\NFLStatsApp\DataAccessLayer\bin\Debug\DataAccessLayerInterfaces.dll
+D:\fall2023\dotNet\.Net3-Final-Project\NFLStatsApp\DataAccessLayer\bin\Debug\DataObjects.dll
+D:\fall2023\dotNet\.Net3-Final-Project\NFLStatsApp\DataAccessLayer\bin\Debug\DataAccessLayerInterfaces.pdb
+D:\fall2023\dotNet\.Net3-Final-Project\NFLStatsApp\DataAccessLayer\bin\Debug\DataObjects.pdb
+D:\fall2023\dotNet\.Net3-Final-Project\NFLStatsApp\DataAccessLayer\obj\Debug\DataAccessLayer.csproj.AssemblyReference.cache
+D:\fall2023\dotNet\.Net3-Final-Project\NFLStatsApp\DataAccessLayer\obj\Debug\DataAccessLayer.csproj.CoreCompileInputs.cache
+D:\fall2023\dotNet\.Net3-Final-Project\NFLStatsApp\DataAccessLayer\obj\Debug\DataAccessLayer.csproj.CopyComplete
+D:\fall2023\dotNet\.Net3-Final-Project\NFLStatsApp\DataAccessLayer\obj\Debug\DataAccessLayer.dll
+D:\fall2023\dotNet\.Net3-Final-Project\NFLStatsApp\DataAccessLayer\obj\Debug\DataAccessLayer.pdb
