@@ -1,0 +1,97 @@
+﻿<Window x:Name="frmMain" x:Class="wpfPresentation.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:wpfPresentation"
+        mc:Ignorable="d"
+        Title="NFL Stats App" Height="700" Width="1200"
+        WindowStartupLocation="CenterScreen" Loaded="frmMain_Loaded" ResizeMode="NoResize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition />
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+        <Menu Grid.Row="0" Padding="20px, 2px">
+            <MenuItem x:Name="mnuFile" Header="File">
+                <MenuItem x:Name="mnuExit" Header="Exit" Click="mnuExit_Click"></MenuItem>
+            </MenuItem>
+            <MenuItem x:Name="mnuEdit" Header="Edit">
+                <MenuItem x:Name="mnuChangePassword" Header="Change Password" Click="mnuChangePassword_Click" ></MenuItem>
+            </MenuItem>
+            <MenuItem x:Name="mnuHelp" Header="Help">
+                <MenuItem x:Name="mnuAbout" Header="About" Click="mnuAbout_Click"></MenuItem>
+            </MenuItem>
+        </Menu>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="250"/>
+                <ColumnDefinition Width="250"/>
+                <ColumnDefinition Width="120"/>
+            </Grid.ColumnDefinitions>
+            <Label x:Name="lblGreeting" Content="You are not logged in"
+                   Padding="20 5 0 0" Margin="5"/>
+            <TextBox x:Name="txtEmail" Margin="5 5 5 0" Grid.Column="1"
+                     HorizontalContentAlignment="Center"
+                     VerticalContentAlignment="Center"/>
+            <PasswordBox x:Name="txtPassword" Margin="5 5 5 0" Grid.Column="2"
+                         HorizontalContentAlignment="Center"
+                         VerticalContentAlignment="Center"/>
+            <Button x:Name="btnLogin" Margin="5 5 20 5" Grid.Column="3"
+                    Content="Login" Click="btnLogin_Click"/>
+            <Button x:Name="btnNewUser" Margin="5 5 20 5" Grid.Column="3" Grid.Row="2"
+                    Content="New User" Click="btnNewUser_Click" />
+            <Label x:Name="lblEmail" Grid.Row="1" Grid.Column="1" Content="Email Address"
+                   HorizontalAlignment="Center" />
+            <Label x:Name="lblPassword" Grid.Row="1" Grid.Column="2" Content="Password"
+                   HorizontalAlignment="Center"/>
+        </Grid>
+        <Grid x:Name="pnlTabs" Grid.Row="3" >
+            <Grid>
+                <TabControl x:Name="tabsetMain">
+                    <TabItem x:Name="tabHome" Header="Home">
+                        <Image Source="NFLFantasy.png" Stretch="UniformToFill" StretchDirection="DownOnly"/>
+                    </TabItem>
+
+                    <TabItem x:Name="tabAllPlayers" Header="All Players" GotFocus="tabAllPlayers_GotFocus" LostFocus="tabAllPlayers_LostFocus">
+                        <DataGrid x:Name="datAllPlayers" IsReadOnly="True" FontSize="18" Margin="10"
+                                  Padding="3" VerticalScrollBarVisibility="Visible"  ColumnWidth="*"/>
+                    </TabItem>
+
+                    <TabItem x:Name="tabAllTeams" Header="All Teams" GotFocus="tabAllTeams_GotFocus">
+                        <DataGrid x:Name="datAllTeams" IsReadOnly="True" FontSize="18" Margin="10"
+                                  Padding="3" VerticalScrollBarVisibility="Visible" ColumnWidth="*" />
+                    </TabItem>
+
+                    <TabItem x:Name="tabPlayerStats" Header="Players/Stats" GotFocus="tabPlayerStats_GotFocus">
+                        <DataGrid x:Name="datAllPlayerStats" IsReadOnly="True" FontSize="18" Margin="10"
+                                  Padding="3" VerticalScrollBarVisibility="Visible" ColumnWidth="*" />
+                    </TabItem>
+                    <TabItem x:Name="tabAllUsers" Header="All Users" GotFocus="tabAllUsers_GotFocus">
+                        <DataGrid x:Name="datAllUsers" IsReadOnly="True" FontSize="18" Margin="10"
+                                  Padding="3" VerticalScrollBarVisibility="Visible" ColumnWidth="*"/>
+                    </TabItem>
+                </TabControl>
+            </Grid>
+        </Grid>
+        <Button x:Name="btnAddPlayer" Grid.Row="4" Margin="10 5 125 10"
+                Content="Add Player" HorizontalAlignment="Right" Width="100" Click="btnAddPlayer_Click" />
+        <Button x:Name="btnAddPlayerStat" Grid.Row="4" Margin="10 5 10 10"
+                Content="Add Player Stat" HorizontalAlignment="Right" Width="100" Click="btnAddPlayerStat_Click" />
+        <StatusBar Grid.Row="5">
+            <StatusBarItem x:Name="statMessage" Padding="20 0" >
+                Welcome. Please log in to continue
+            </StatusBarItem>
+        </StatusBar>
+        
+    </Grid>
+</Window>

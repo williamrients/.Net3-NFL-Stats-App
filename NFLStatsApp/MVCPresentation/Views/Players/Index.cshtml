@@ -1,0 +1,34 @@
+﻿@model IEnumerable<DataObjects.Players>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>All Players</h2>
+
+<p class="btn btn-default" style="margin: 5px;">
+    @Html.ActionLink("New Player", "Create")
+</p>
+
+<div class="container">
+    <div class="row">
+        @foreach (var player in Model)
+        {
+            <div class="col-sm-12 col-md-6 col-lg-4">
+                <div class="panel panel-default">
+                    <img class="panel-heading" style="max-width: 100%; height: auto;" src='https://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/@(player.EspnID+".png&w=350&h=254")' />
+                    <div class="panel-body">
+                        Name: @player.GivenName @player.FamilyName
+                        <br /> <br />
+                        Team: @player.TeamName
+                        <br /> <br />
+                        Year Drafted: @player.YearDrafted
+                    </div>
+                    <div class="btn btn-default" style="margin: 0 0 10px 10px;">@Html.ActionLink("Stats", "Details", "Stats", new { playerID = player.PlayerID }, new { @class = "" })</div>
+                    <div class="btn btn-default" style="margin: 0 0 10px 10px;">@Html.ActionLink("Edit", "Edit", new { playerID = player.PlayerID })</div>
+                    <div class="btn btn-default" style="margin: 0 0 10px 10px;">@Html.ActionLink("Team", "Details", "Teams", new { teamName = player.TeamName }, new { @class = "" })</div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

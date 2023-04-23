@@ -1,0 +1,31 @@
+﻿@model IEnumerable<DataObjects.Teams>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>NFL Teams</h2>
+
+
+<div class="container">
+    <div class="row">
+        @foreach (var team in Model)
+        {
+            <div class="col-sm-12 col-md-6 col-lg-4">
+                <div class="panel panel-default">
+                    <img class="panel-heading" style="max-width: 100%; height: auto;" src='https://a.espncdn.com/i/teamlogos/nfl/500/@(team.TeamAbbrivation+".png")' />
+                    <div class="panel-body">
+                        Team: @team.TeamName
+                        <br /> <br />
+                        Location: @team.TeamCity @team.TeamState
+                        <br /> <br />
+                        Mascot: @team.TeamMascot
+                    </div>
+                    <div class="btn btn-default" style="margin: 0 0 10px 10px;">@Html.ActionLink("Players", "PlayersOnTeam", "Players", new { teamName = team.TeamName }, new { @class = "" })</div>                    
+                    <div class="btn btn-default" style="margin: 0 0 10px 10px;">@Html.ActionLink("Edit", "Edit", new { teamName = team.TeamName })</div>
+                    <div class="btn btn-default" style="margin: 0 0 10px 10px;">@Html.ActionLink("Details", "Details", new { teamName = team.TeamName })</div>
+                </div>
+            </div>
+         }
+    </div>
+</div>

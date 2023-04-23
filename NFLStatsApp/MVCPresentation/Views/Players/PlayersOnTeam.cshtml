@@ -1,0 +1,38 @@
+﻿@model IEnumerable<DataObjects.Players>
+
+@{
+    ViewBag.Title = "PlayersOnTeam";
+}
+
+<h2>Players</h2>
+
+<p class="btn btn-default" style="margin: 5px;">
+    @Html.ActionLink("Add a Player", "Create")
+</p>
+
+<div class="container">
+    <div class="row">
+        @foreach (var player in Model)
+        {
+            <div class="col-sm-12 col-md-6 col-lg-4">
+                <div class="panel panel-default">
+                    <img class="panel-heading" style="max-width: 100%; height: auto;" src='https://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/@(player.EspnID+".png&w=350&h=254")' />
+                    <div class="panel-body">
+                        Name: @player.GivenName @player.FamilyName
+                        <br /> <br />
+                        Year Drafted: @player.YearDrafted
+                    </div>
+                    <div class="btn btn-default" style="margin: 0 0 10px 10px;">@Html.ActionLink("Stats", "Details", new { playerID = player.PlayerID })</div>
+                    <div class="btn btn-default" style="margin: 0 0 10px 10px;">@Html.ActionLink("Edit", "Edit", new { playerID = player.PlayerID })</div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+@*
+@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+@Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+    *@
