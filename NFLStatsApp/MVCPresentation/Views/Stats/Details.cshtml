@@ -4,29 +4,77 @@
     ViewBag.Title = "Details";
 }
 
-<h2>@Model.First().GivenName @Model.First().FamilyName's Stats</h2>
+@if (Model.Count() > 0)
+{
+    <h2>@Model.First().GivenName @Model.First().FamilyName's Stats</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
 
-<table class="table">
-    <tr>
-        <th>
-            Season
-        </th>
-        <th>
-            Stat Name
-        </th>
-        <th>
-            Stat Amount
-        </th>
-    </tr>
-    @foreach (var item in Model)
-    {
+    <table class="table">
+        <tr>
+            <th>
+                Season
+            </th>
+            <th>
+                Stat Name
+            </th>
+            <th>
+                Stat Amount
+            </th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SeasonID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StatName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StatAmount)
+                </td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <h2>There are currently no stats for this player</h2>
+}
+
+
+
+
+@*<table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.GivenName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FamilyName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StatName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StatAmount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Active)
+            </th>
+            <th></th>
+        </tr>
+
+    @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.SeasonID)
+                @Html.DisplayFor(modelItem => item.GivenName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FamilyName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.StatName)
@@ -34,53 +82,15 @@
             <td>
                 @Html.DisplayFor(modelItem => item.StatAmount)
             </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Active)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
         </tr>
     }
-</table>
 
-@*<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.GivenName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FamilyName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.StatName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.StatAmount)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Active)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.GivenName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FamilyName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StatName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StatAmount)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Active)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
-}
-
-</table>*@
+    </table>*@

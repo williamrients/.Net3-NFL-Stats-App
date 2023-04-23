@@ -239,6 +239,16 @@ AS
 	END
 GO
 
+print '' print '*** creating sp_select_all_team_names'
+GO
+CREATE PROCEDURE [dbo].[sp_select_all_team_names]
+AS
+	BEGIN
+		SELECT	[TeamName]
+		FROM	[Team]
+	END
+GO
+
 /* Player Related */
 
 print '' print '*** creating sp_select_all_active_players'
@@ -275,16 +285,18 @@ print '' print '** creating sp_insert_new_player'
 GO
 CREATE PROCEDURE [dbo].[sp_insert_new_player]
 (
-	@givenName	 [nvarchar] (50),
-	@familyName  [nvarchar] (50),
-	@yearDrafted [nvarchar] (4)
+	@givenName		[nvarchar] (50),
+	@familyName  	[nvarchar] (50),
+	@yearDrafted 	[nvarchar] (4),
+	@teamName		[nvarchar] (50)
 )
 AS
 	BEGIN
 		INSERT INTO [dbo].[player]
-		([givenName], [familyName], [yearDrafted])
+		([givenName], [familyName], [yearDrafted], [teamName])
 		VALUES
-		(@givenName, @familyName, @yearDrafted)
+		(@givenName, @familyName, @yearDrafted, @teamName)
+		SELECT @@ROWCOUNT
 	END
 GO
 
@@ -336,12 +348,3 @@ AS
 	END
 GO
 
-print '' print '*** creating sp_select_all_team_names'
-GO
-CREATE PROCEDURE [dbo].[sp_select_all_team_names]
-AS
-	BEGIN
-		SELECT	[TeamName]
-		FROM	[Team]
-	END
-GO

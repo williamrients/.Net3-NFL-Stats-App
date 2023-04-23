@@ -12,7 +12,7 @@ namespace DataAccessLayer
 {
     public class PlayerAccessor : IPlayerAccessor
     {
-        public int InsertNewPlayer(string firstName, string lastName, string yearDrafted)
+        public int InsertNewPlayer(string firstName, string lastName, string yearDrafted, string teamName)
         {
             int result = 0;
 
@@ -25,13 +25,10 @@ namespace DataAccessLayer
 
             cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.Parameters.Add("@givenName", SqlDbType.NVarChar, 50);
-            cmd.Parameters.Add("@familyName", SqlDbType.NVarChar, 50);
-            cmd.Parameters.Add("@yearDrafted", SqlDbType.NVarChar, 4);
-
-            cmd.Parameters["@givenName"].Value = firstName;
-            cmd.Parameters["@familyName"].Value = lastName;
-            cmd.Parameters["@yearDrafted"].Value = yearDrafted;
+            cmd.Parameters.AddWithValue("@givenName", firstName);
+            cmd.Parameters.AddWithValue("@familyName", lastName);
+            cmd.Parameters.AddWithValue("@yearDrafted", yearDrafted);
+            cmd.Parameters.AddWithValue("@teamName", teamName);
 
             try
             {
@@ -86,7 +83,7 @@ namespace DataAccessLayer
                         player.YearDrafted = reader.GetString(3);
                         player.Active = reader.GetBoolean(4);
                         player.TeamName = reader.GetString(5);
-                        player.EspnID = reader.GetString(6);
+                        player.EspnID = reader.IsDBNull(6) ? null : reader.GetString(6);
                         allPlayers.Add(player);
                     }
                 }

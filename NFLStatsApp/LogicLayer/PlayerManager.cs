@@ -53,14 +53,22 @@ namespace LogicLayer
             return players; 
         }
 
-        public bool InsertNewPlayer(string firstName, string lastName, string yearDrafted)
+        public bool InsertNewPlayer(string firstName, string lastName, string yearDrafted, string teamName)
         {
             bool success = false;
 
-            if (1 == _playerAccessor.InsertNewPlayer(firstName, lastName, yearDrafted))
+            try
             {
-                success = true;
+                if (1 == _playerAccessor.InsertNewPlayer(firstName, lastName, yearDrafted, teamName))
+                {
+                    success = true;
+                }
             }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            
 
             return success;
         }

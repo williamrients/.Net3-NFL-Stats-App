@@ -53,18 +53,22 @@ namespace MVCPresentation.Controllers
 
         // POST: Players/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Players player)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add insert logic here
+                try
+                {
+                    _playerManager.InsertNewPlayer(player.GivenName, player.FamilyName, player.YearDrafted, player.TeamName);
 
-                return RedirectToAction("Index");
+                    return RedirectToAction("Index");
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
             }
-            catch
-            {
-                return View();
-            }
+            return View(player);
         }
 
         // GET: Players/Edit/5
