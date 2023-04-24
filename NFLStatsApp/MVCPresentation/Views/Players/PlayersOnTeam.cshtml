@@ -16,7 +16,14 @@
         {
             <div class="col-sm-12 col-md-6 col-lg-4">
                 <div class="panel panel-default">
-                    <img class="panel-heading" style="max-width: 100%; height: auto;" src='https://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/@(player.EspnID+".png&w=350&h=254")' />
+                    @if (player.EspnID != null)
+                    {
+                        <img class="panel-heading" style="max-width: 100%; height: auto;" src='https://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/@(player.EspnID+".png&w=350&h=254")' />
+                    }
+                    else if (player.EspnID == null)
+                    {
+                        <img class="panel-heading" style="max-width: 100%; height: 260px;" src="https://www.playerprofiler.com/wp-content/uploads/2014/05/HeadshotSilhouette6.png" />
+                    }
                     <div class="panel-body">
                         Name: @player.GivenName @player.FamilyName
                         <br /> <br />

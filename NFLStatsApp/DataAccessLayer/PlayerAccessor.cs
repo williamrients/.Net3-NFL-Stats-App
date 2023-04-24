@@ -133,7 +133,7 @@ namespace DataAccessLayer
                         players.YearDrafted = reader.GetString(3);
                         players.Active = reader.GetBoolean(4);
                         players.TeamName = reader.GetString(5);
-                        players.EspnID = reader.GetString(6);
+                        players.EspnID = reader.IsDBNull(6) ? null : reader.GetString(6);
 
                         playerList.Add(players);
                     }
