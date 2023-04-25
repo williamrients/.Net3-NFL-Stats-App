@@ -18,11 +18,6 @@ namespace MVCPresentation.Controllers
             _statManager = new PlayerStatManager();  
         }
 
-        public StatsController(IPlayerStatManager statManager)
-        {
-            _statManager = statManager;
-        }
-
         // GET: Stats
         public ActionResult Index()
         {

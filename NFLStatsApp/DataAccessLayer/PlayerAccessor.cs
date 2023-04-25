@@ -48,6 +48,51 @@ namespace DataAccessLayer
             return result;
         }
 
+        public Players SelectPlayerByPlayerID(int playerID)
+        {
+            Players player = new Players();
+
+            var connectionFactory = new DBconnection();
+            var conn = connectionFactory.GetConnection();
+
+            var cmdText = "sp_select_player_by_player_id";
+
+            var cmd = new SqlCommand(cmdText, conn);
+
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@PlayerID", playerID);
+
+            try
+            {
+                conn.Open();
+
+                var reader = cmd.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    reader.Read();
+                    player.PlayerID = reader.GetInt32(0);
+                    player.GivenName = reader.GetString(1);
+                    player.FamilyName = reader.GetString(2);
+                    player.YearDrafted = reader.GetString(3);
+                    player.Active = reader.GetBoolean(4);
+                    player.TeamName = reader.GetString(5);
+                    player.EspnID = reader.GetString(6);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return player;
+        }
+
         public List<Players> SelectPlayersByActive(bool active)
         {
             List<Players> allPlayers = new List<Players>();
@@ -145,6 +190,42 @@ namespace DataAccessLayer
             }
 
             return playerList;
+        }
+
+        public int UpdatePlayerTeamByPlayerID(Players oldPlayer, Players newPlayer)
+        {
+            int rows = 0;
+
+            var connectionFactory = new DBconnection();
+            var conn = connectionFactory.GetConnection();
+
+            var cmdText = "sp_update_player_team_by_playerID";
+
+            var cmd = new SqlCommand(cmdText, conn);
+
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@PlayerID", oldPlayer.PlayerID);
+
+            cmd.Parameters.AddWithValue("@TeamName", newPlayer.TeamName);
+
+            cmd.Parameters.AddWithValue("@OldTeamName", oldPlayer.TeamName);
+
+            try
+            {
+                conn.Open();
+                rows = cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return rows;
         }
     }
 }

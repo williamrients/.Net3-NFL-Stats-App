@@ -348,3 +348,36 @@ AS
 	END
 GO
 
+print '' print '*** creating sp_select_player_by_player_id'
+GO
+CREATE PROCEDURE [dbo].[sp_select_player_by_player_id]
+(
+	@PlayerId		[int]
+)
+AS
+	BEGIN
+		SELECT playerID, givenName, familyName, yearDrafted, active, teamName, espnID
+		FROM player
+		WHERE playerID = @PlayerId
+	END
+GO
+
+print '' print '*** Creating sp_update_player_team_by_playerID'
+GO
+CREATE PROCEDURE sp_update_player_team_by_playerID
+	(
+		@PlayerID 		[int],
+		
+		@TeamName		[nvarchar] (50),
+		@OldTeamName 	[nvarchar] (50)		
+	)
+AS
+	BEGIN
+		UPDATE 	[Player]
+		SET		[teamName] = @TeamName
+		WHERE	[PlayerID] = @PlayerID
+		AND		[TeamName] = @OldTeamName
+		
+		RETURN @@ROWCOUNT
+	END
+GO	

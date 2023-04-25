@@ -12,5 +12,7 @@ namespace LogicLayerInterfaces
         List<Players> GetAllPlayersByActive(bool active);
         bool InsertNewPlayer(string firstName, string lastName, string yearDrafted, string teamName);
         List<Players> GetAllPlayersByTeamName(string teamName);
+        Players GetPlayerByPlayerID(int playerID);
+        bool EditPlayerTeamByPlayerID(Players oldPlayer, Players newPlayer);
     }
 }

@@ -23,6 +23,21 @@ namespace LogicLayer
             _playerAccessor = playerAccessor;
         }
 
+        public bool EditPlayerTeamByPlayerID(Players oldPlayer, Players newPlayer)
+        {
+            bool result = false;
+
+            try
+            {
+                result = (1 == _playerAccessor.UpdatePlayerTeamByPlayerID(oldPlayer, newPlayer));
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return result;
+        }
+
         public List<Players> GetAllPlayersByActive(bool active)
         {
             List<Players> players = null;
@@ -51,6 +66,21 @@ namespace LogicLayer
                 throw ex;
             }
             return players; 
+        }
+
+        public Players GetPlayerByPlayerID(int playerID)
+        {
+            Players player = new Players();
+
+            try
+            {
+                player = _playerAccessor.SelectPlayerByPlayerID(playerID);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return player;
         }
 
         public bool InsertNewPlayer(string firstName, string lastName, string yearDrafted, string teamName)

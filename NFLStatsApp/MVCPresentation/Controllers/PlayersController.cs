@@ -72,24 +72,45 @@ namespace MVCPresentation.Controllers
         }
 
         // GET: Players/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int playerID)
         {
-            return View();
+            if (playerID == null || playerID == 0)
+            {
+                return RedirectToAction("Index");
+            }
+
+            try
+            {
+                Players player = _playerManager.GetPlayerByPlayerID(playerID);
+                return View(player);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         // POST: Players/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int playerID, Players player)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add update logic here
+                try
+                {
+                    Players oldPlayer = _playerManager.GetPlayerByPlayerID(playerID);
+                    _playerManager.EditPlayerTeamByPlayerID(oldPlayer, player);
 
-                return RedirectToAction("Index");
+                    return RedirectToAction("Index");
+                }
+                catch (Exception)
+                {
+                    return View();
+                }
             }
-            catch
+            else
             {
-                return View();
+                return View(player);
             }
         }
 
