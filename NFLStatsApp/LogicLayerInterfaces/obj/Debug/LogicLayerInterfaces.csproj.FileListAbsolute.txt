@@ -34,3 +34,12 @@ D:\fall2023\dotNet\.Net3-Final-Project\NFLStatsApp\LogicLayerInterfaces\obj\Debu
 D:\fall2023\dotNet\.Net3-Final-Project\NFLStatsApp\LogicLayerInterfaces\obj\Debug\LogicLayerInterfaces.csproj.CopyComplete
 D:\fall2023\dotNet\.Net3-Final-Project\NFLStatsApp\LogicLayerInterfaces\obj\Debug\LogicLayerInterfaces.dll
 D:\fall2023\dotNet\.Net3-Final-Project\NFLStatsApp\LogicLayerInterfaces\obj\Debug\LogicLayerInterfaces.pdb
+C:\school-spring2023\.net3\.Net3-NFL-Stats-App\NFLStatsApp\LogicLayerInterfaces\bin\Debug\LogicLayerInterfaces.dll
+C:\school-spring2023\.net3\.Net3-NFL-Stats-App\NFLStatsApp\LogicLayerInterfaces\bin\Debug\LogicLayerInterfaces.pdb
+C:\school-spring2023\.net3\.Net3-NFL-Stats-App\NFLStatsApp\LogicLayerInterfaces\bin\Debug\DataObjects.dll
+C:\school-spring2023\.net3\.Net3-NFL-Stats-App\NFLStatsApp\LogicLayerInterfaces\bin\Debug\DataObjects.pdb
+C:\school-spring2023\.net3\.Net3-NFL-Stats-App\NFLStatsApp\LogicLayerInterfaces\obj\Debug\LogicLayerInterfaces.csproj.AssemblyReference.cache
+C:\school-spring2023\.net3\.Net3-NFL-Stats-App\NFLStatsApp\LogicLayerInterfaces\obj\Debug\LogicLayerInterfaces.csproj.CoreCompileInputs.cache
+C:\school-spring2023\.net3\.Net3-NFL-Stats-App\NFLStatsApp\LogicLayerInterfaces\obj\Debug\LogicLayerInterfaces.csproj.CopyComplete
+C:\school-spring2023\.net3\.Net3-NFL-Stats-App\NFLStatsApp\LogicLayerInterfaces\obj\Debug\LogicLayerInterfaces.dll
+C:\school-spring2023\.net3\.Net3-NFL-Stats-App\NFLStatsApp\LogicLayerInterfaces\obj\Debug\LogicLayerInterfaces.pdb

@@ -19,7 +19,6 @@ namespace DataObjects
         public bool Active { get; set; }
         [Required]
         public string TeamName { get; set; }
-        [Required]
         public string EspnID { get; set; }
     }
 }
