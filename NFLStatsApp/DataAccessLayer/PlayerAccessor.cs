@@ -78,7 +78,7 @@ namespace DataAccessLayer
                     player.YearDrafted = reader.GetString(3);
                     player.Active = reader.GetBoolean(4);
                     player.TeamName = reader.GetString(5);
-                    player.EspnID = reader.GetString(6);
+                    player.EspnID = reader.IsDBNull(6) ? null : reader.GetString(6);
                 }
             }
             catch (Exception ex)

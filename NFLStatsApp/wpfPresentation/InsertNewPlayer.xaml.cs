@@ -88,7 +88,7 @@ namespace wpfPresentation
 
             try
             {
-                if (_playerManager.InsertNewPlayer(newFirstName, newLastName, yearDrafted))
+                if (_playerManager.InsertNewPlayer(newFirstName, newLastName, yearDrafted, "Vikings"))
                 {
                     this.DialogResult = true;
                 }

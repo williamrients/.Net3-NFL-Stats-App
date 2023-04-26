@@ -2,15 +2,22 @@
 
 @{
     ViewBag.Title = "Edit";
+
+    IEnumerable<String> teamsDDL = (IEnumerable<String>)ViewBag.teamsDDL;
 }
 
 <h2>Edit Player's Team</h2>
+
+@if (ViewBag.ErrorMessage != null)
+{
+    @ViewBag.ErrorMessage.ToString()
+}
 
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -54,7 +61,7 @@
         <div class="form-group">
             <label class="control-label col-md-2">Team Name</label>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.TeamName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownListFor(model => model.TeamName, new SelectList(teamsDDL, "Team"), new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.TeamName, "", new { @class = "text-danger" })
             </div>
         </div>

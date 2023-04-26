@@ -82,6 +82,7 @@ namespace MVCPresentation.Controllers
             try
             {
                 Players player = _playerManager.GetPlayerByPlayerID(playerID);
+                ViewBag.teamsDDL = _teamsDDL;
                 return View(player);
             }
             catch (Exception ex)
@@ -94,22 +95,15 @@ namespace MVCPresentation.Controllers
         [HttpPost]
         public ActionResult Edit(int playerID, Players player)
         {
-            if (ModelState.IsValid)
+            try
             {
-                try
-                {
-                    Players oldPlayer = _playerManager.GetPlayerByPlayerID(playerID);
-                    _playerManager.EditPlayerTeamByPlayerID(oldPlayer, player);
-
-                    return RedirectToAction("Index");
-                }
-                catch (Exception)
-                {
-                    return View();
-                }
+                Players oldPlayer = _playerManager.GetPlayerByPlayerID(playerID);
+                _playerManager.EditPlayerTeamByPlayerID(oldPlayer, player);
+                return RedirectToAction("Index");                
             }
-            else
+            catch (Exception ex)
             {
+                ViewBag.ErrorMessage = ex.Message;
                 return View(player);
             }
         }
