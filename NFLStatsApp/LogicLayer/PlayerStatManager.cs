@@ -64,5 +64,35 @@ namespace LogicLayer
 
             return success;
         }
+
+        public List<string> RetrieveAllSeasonIDs()
+        {
+            List<string> seasonIDs = null;
+
+            try
+            {
+                seasonIDs = _playerStatAccessor.SelectAllSeasonIDs();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return seasonIDs;
+        }
+
+        public List<string> RetrieveAllStatNames()
+        {
+            List<string> statNames = null;
+
+            try
+            {
+                statNames = _playerStatAccessor.SelectAllStatNames();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return statNames;
+        }
     }
 }

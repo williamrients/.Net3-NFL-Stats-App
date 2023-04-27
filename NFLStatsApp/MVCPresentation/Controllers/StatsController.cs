@@ -6,16 +6,31 @@ using System.Web.Mvc;
 using DataObjects;
 using LogicLayerInterfaces;
 using LogicLayer;
+using MVCPresentation.Models;
 
 namespace MVCPresentation.Controllers
 {
     public class StatsController : Controller
     {
         IPlayerStatManager _statManager = null;
+        IPlayerManager _playerManager = null;
+        private IEnumerable<String> _statsDDL;
+        private IEnumerable<String> _seasonIDsDDL;
 
         public StatsController()
         {
-            _statManager = new PlayerStatManager();  
+            _statManager = new PlayerStatManager();
+            _playerManager = new PlayerManager();
+            try
+            {
+                _statsDDL = _statManager.RetrieveAllStatNames();
+                _seasonIDsDDL = _statManager.RetrieveAllSeasonIDs();
+            }
+            catch (Exception)
+            {
+                // direct to error page
+                throw;
+            }
         }
 
         // GET: Stats
@@ -27,7 +42,7 @@ namespace MVCPresentation.Controllers
         }
 
         // GET: Stats/Details/5
-        public ActionResult Details(int? playerID)
+        public ActionResult Details(int playerID)
         {
             if (playerID == null || playerID == 0)
             {
@@ -39,9 +54,27 @@ namespace MVCPresentation.Controllers
         }
 
         // GET: Stats/Create
-        public ActionResult Create()
+        public ActionResult Create(int playerID)
         {
-            return View();
+            if (playerID == null || playerID == 0)
+            {
+                return RedirectToAction("Index");
+            }
+            
+            try
+            {
+                PlayerAndStatsModel playerModel = new PlayerAndStatsModel();
+                playerModel.player = _playerManager.GetPlayerByPlayerID(playerID);
+                ViewBag.statNamesDDL = _statsDDL;
+                ViewBag.seasonIDsDDL = _seasonIDsDDL;
+                return View(playerModel);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            
         }
 
         // POST: Stats/Create

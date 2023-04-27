@@ -364,7 +364,7 @@ GO
 
 print '' print '*** Creating sp_update_player_team_by_playerID'
 GO
-CREATE PROCEDURE sp_update_player_team_by_playerID
+CREATE PROCEDURE [sp_update_player_team_by_playerID]
 	(
 		@PlayerID 		[int],
 		
@@ -381,3 +381,23 @@ AS
 		RETURN @@ROWCOUNT
 	END
 GO	
+
+print '' print '*** Creating sp_select_all_statNames'
+GO
+CREATE PROCEDURE [sp_select_all_statNames]
+AS
+	BEGIN
+		SELECT	[statName]
+		FROM	[Stat]
+	END
+GO
+
+print '' print '*** Creating sp_select_all_seasonIDs'
+GO
+CREATE PROCEDURE [sp_select_all_seasonIDs]
+AS
+	BEGIN
+		SELECT	[seasonID]
+		FROM	[Season]
+	END
+GO

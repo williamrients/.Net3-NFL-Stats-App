@@ -12,5 +12,7 @@ namespace LogicLayerInterfaces
         List<Stats> GetAllPlayerStatsByActive(bool active);
         bool InsertNewPlayerStat(int playerID, string statName, string seasonID, double statAmount);
         List<Stats> GetAllPlayerStatsByPlayerID(int playerID);
+        List<string> RetrieveAllStatNames();
+        List<string> RetrieveAllSeasonIDs();
     }
 }

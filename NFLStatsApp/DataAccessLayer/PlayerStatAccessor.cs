@@ -53,6 +53,82 @@ namespace DataAccessLayer
             return result;
         }
 
+        public List<string> SelectAllSeasonIDs()
+        {
+            List<string> seasonIDs = new List<string>();
+
+            var connectionFactory = new DBconnection();
+            var conn = connectionFactory.GetConnection();
+
+            var cmdText = "sp_select_all_seasonIDs";
+
+            var cmd = new SqlCommand(cmdText, conn);
+
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            try
+            {
+                conn.Open();
+
+                var reader = cmd.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        seasonIDs.Add(reader.GetString(0));
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return seasonIDs;
+        }
+
+        public List<string> SelectAllStatNames()
+        {
+            List<string> statNames = new List<string>();
+
+            var connectionFactory = new DBconnection();
+            var conn = connectionFactory.GetConnection();
+
+            var cmdText = "sp_select_all_statNames";
+
+            var cmd = new SqlCommand(cmdText, conn);
+
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            try
+            {
+                conn.Open();
+
+                var reader = cmd.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        statNames.Add(reader.GetString(0));
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return statNames;
+        }
+
         public List<Stats> SelectPlayerStatsByActive(bool active)
         {
             List<Stats> allPlayerStats = new List<Stats>();

@@ -12,5 +12,7 @@ namespace DataAccessLayerInterfaces
         List<Stats> SelectPlayerStatsByActive(bool active);
         int InsertNewPlayerStat(int playerID, string statName, string seasonID, double statAmount);
         List<Stats> SelectPlayerStatsByPlayerID(int playerID);
+        List<string> SelectAllStatNames();
+        List<string> SelectAllSeasonIDs();
     }
 }
