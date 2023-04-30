@@ -23,6 +23,21 @@ namespace LogicLayer
             _playerStatAccessor = playerStatAccessor;
         }
 
+        public bool EditStatByPlayerIDSeasonIDAndStatName(Stats oldStat, Stats newStat)
+        {
+            bool result = false;
+
+            try
+            {
+                result = (1 == _playerStatAccessor.UpdateStatByPlayerIDSeasonIDAndStatName(oldStat, newStat));
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return result;
+        }
+
         public List<Stats> GetAllPlayerStatsByActive(bool active)
         {
             List<Stats> playerStats = null;
@@ -53,11 +68,26 @@ namespace LogicLayer
             return playerStats;
         }
 
-        public bool InsertNewPlayerStat(int playerID, string statName, string seasonID, double statAmount)
+        public Stats GetStatByPlayerIDSeasonIDAndStatName(Stats stats)
+        {
+            Stats playerStat = null;
+
+            try
+            {
+                playerStat = _playerStatAccessor.SelectStatByPlayerIDSeasonIDAndStatName(stats);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return playerStat;
+        }
+
+        public bool InsertNewPlayerStat(Stats stat)
         {
             bool success = false;
 
-            if (1 == _playerStatAccessor.InsertNewPlayerStat(playerID, statName, seasonID, statAmount))
+            if (1 == _playerStatAccessor.InsertNewPlayerStat(stat))
             {
                 success = true;
             }
@@ -93,6 +123,29 @@ namespace LogicLayer
                 throw ex;
             }
             return statNames;
+        }
+
+        public bool RetrieveStatByPlayerIDSeasonIDAndStatName(Stats stats)
+        {
+            try
+            {
+                return _playerStatAccessor.SelectStatByPlayerIDSeasonIDAndStatName(stats) != null;
+            }
+            catch (ApplicationException ex)
+            {
+                if (ex.Message == "Stat not found.")
+                {
+                    return false;
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            catch (Exception ax)
+            {
+                throw new ApplicationException("Database Error.", ax);
+            }
         }
     }
 }

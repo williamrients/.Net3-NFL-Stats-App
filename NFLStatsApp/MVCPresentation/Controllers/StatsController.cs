@@ -42,7 +42,7 @@ namespace MVCPresentation.Controllers
         }
 
         // GET: Stats/Details/5
-        public ActionResult Details(int playerID)
+        public ActionResult Details(int? playerID)
         {
             if (playerID == null || playerID == 0)
             {
@@ -54,7 +54,7 @@ namespace MVCPresentation.Controllers
         }
 
         // GET: Stats/Create
-        public ActionResult Create(int playerID)
+        public ActionResult Create(int? playerID)
         {
             if (playerID == null || playerID == 0)
             {
@@ -64,7 +64,7 @@ namespace MVCPresentation.Controllers
             try
             {
                 PlayerAndStatsModel playerModel = new PlayerAndStatsModel();
-                playerModel.player = _playerManager.GetPlayerByPlayerID(playerID);
+                playerModel.player = _playerManager.GetPlayerByPlayerID((int)playerID);
                 ViewBag.statNamesDDL = _statsDDL;
                 ViewBag.seasonIDsDDL = _seasonIDsDDL;
                 return View(playerModel);
@@ -79,38 +79,68 @@ namespace MVCPresentation.Controllers
 
         // POST: Stats/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(PlayerAndStatsModel playerAndStatsModel)
         {
             try
             {
-                // TODO: Add insert logic here
+                playerAndStatsModel.stats.PlayerID = playerAndStatsModel.player.PlayerID;
+                playerAndStatsModel.player = _playerManager.GetPlayerByPlayerID(playerAndStatsModel.player.PlayerID);
+                if (_statManager.RetrieveStatByPlayerIDSeasonIDAndStatName(playerAndStatsModel.stats))
+                {
+                    Session["playerStats"] = playerAndStatsModel;
+                    Session["editingMessage"] = "Updating Stat for " + playerAndStatsModel.player.GivenName + " " + playerAndStatsModel.player.FamilyName;
+                    return RedirectToAction("Edit", new 
+                    {
+                        playerID = playerAndStatsModel.stats.PlayerID,
+                        statName = playerAndStatsModel.stats.StatName,
+                        seasonID = playerAndStatsModel.stats.SeasonID
+                    });
+                }
+                else
+                {
+                    _statManager.InsertNewPlayerStat(playerAndStatsModel.stats);
+                }
 
                 return RedirectToAction("Index");
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                throw ex;
             }
         }
 
         // GET: Stats/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int playerID, string statName, string seasonID)
         {
-            return View();
+            Stats stats = new Stats()
+            {
+                PlayerID = playerID,
+                StatName = statName,
+                SeasonID = seasonID
+            };
+            stats = _statManager.GetStatByPlayerIDSeasonIDAndStatName(stats);
+            return View(stats);
         }
 
         // POST: Stats/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int playerID, string statName, string seasonID, Stats stats)
         {
             try
             {
-                // TODO: Add update logic here
-
+                Stats oldStat = new Stats()
+                {
+                    PlayerID = playerID,
+                    StatName = statName,
+                    SeasonID = seasonID
+                };
+                oldStat = _statManager.GetStatByPlayerIDSeasonIDAndStatName(oldStat);
+                _statManager.EditStatByPlayerIDSeasonIDAndStatName(oldStat, stats);
                 return RedirectToAction("Index");
             }
-            catch
+            catch (Exception ex)
             {
+                ViewBag.Message = ex.Message;
                 return View();
             }
         }

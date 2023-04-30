@@ -12,7 +12,7 @@ namespace DataAccessLayer
 {
     public class PlayerStatAccessor : IPlayerStatAccessor
     {
-        public int InsertNewPlayerStat(int playerID, string statName, string seasonID, double statAmount)
+        public int InsertNewPlayerStat(Stats stat)
         {
             int result = 0;
 
@@ -25,15 +25,10 @@ namespace DataAccessLayer
 
             cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.Parameters.Add("@playerID", SqlDbType.Int);
-            cmd.Parameters.Add("@statName", SqlDbType.NVarChar, 50);
-            cmd.Parameters.Add("@seasonID", SqlDbType.NVarChar, 9);
-            cmd.Parameters.Add("@statAmount", SqlDbType.Float);
-
-            cmd.Parameters["@playerID"].Value = playerID;
-            cmd.Parameters["@statName"].Value = statName;
-            cmd.Parameters["@seasonID"].Value = seasonID;
-            cmd.Parameters["@statAmount"].Value = statAmount;
+            cmd.Parameters.AddWithValue("@playerID", stat.PlayerID);
+            cmd.Parameters.AddWithValue("@statName", stat.StatName);
+            cmd.Parameters.AddWithValue("@seasonID", stat.SeasonID);
+            cmd.Parameters.AddWithValue("@statAmount", stat.StatAmount);
 
             try
             {
@@ -227,6 +222,98 @@ namespace DataAccessLayer
             }
 
             return allPlayerStats;
+        }
+
+        public Stats SelectStatByPlayerIDSeasonIDAndStatName(Stats stats)
+        {
+            Stats playerStat = null;
+
+            var connectionFactory = new DBconnection();
+            var conn = connectionFactory.GetConnection();
+
+            var cmdText = "sp_select_stat_by_playerID_seasonID_and_statName";
+
+            var cmd = new SqlCommand(cmdText, conn);
+
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@playerID", stats.PlayerID);
+            cmd.Parameters.AddWithValue("@SeasonID", stats.SeasonID);
+            cmd.Parameters.AddWithValue("@StatName", stats.StatName);
+
+            try
+            {
+                conn.Open();
+
+                var reader = cmd.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    reader.Read();
+                    playerStat = new Stats()
+                    {
+                        PlayerID = reader.GetInt32(0),
+                        StatName = reader.GetString(1),
+                        SeasonID = reader.GetString(2),
+                        StatAmount = reader.GetDouble(3)
+                    };
+                }
+                else
+                {
+                    throw new ApplicationException("Stat not found.");
+                }
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return playerStat;
+        }
+
+        public int UpdateStatByPlayerIDSeasonIDAndStatName(Stats oldStat, Stats newStat)
+        {
+            int rows = 0;
+
+            var connectionFactory = new DBconnection();
+            var conn = connectionFactory.GetConnection();
+
+            var cmdText = "sp_update_stat_by_playerID_seasonID_and_statName";
+
+            var cmd = new SqlCommand(cmdText, conn);
+
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@PlayerID", oldStat.PlayerID);
+
+            cmd.Parameters.AddWithValue("@SeasonID", newStat.SeasonID);
+            cmd.Parameters.AddWithValue("@StatName", newStat.StatName);
+            cmd.Parameters.AddWithValue("@StatAmount", newStat.StatAmount);
+
+            cmd.Parameters.AddWithValue("@OldSeasonID", oldStat.SeasonID);
+            cmd.Parameters.AddWithValue("@OldStatName", oldStat.StatName);
+            cmd.Parameters.AddWithValue("@OldStatAmount", oldStat.StatAmount);
+
+            try
+            {
+                conn.Open();
+                rows = cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return rows;
         }
     }
 }

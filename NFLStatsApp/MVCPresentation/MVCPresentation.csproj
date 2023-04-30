@@ -267,6 +267,7 @@
     <Content Include="Views\Players\Create.cshtml" />
     <Content Include="Views\Players\Edit.cshtml" />
     <Content Include="Views\Stats\Create.cshtml" />
+    <Content Include="Views\Stats\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

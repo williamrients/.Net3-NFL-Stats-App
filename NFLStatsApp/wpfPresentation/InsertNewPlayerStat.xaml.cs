@@ -25,6 +25,7 @@ namespace wpfPresentation
     public partial class InsertNewPlayerStat : Window
     {
         private int _selectedPlayerStat;
+        private Stats _stats;
         private PlayerStatManager _playerStatManager = new PlayerStatManager();
 
         public InsertNewPlayerStat(PlayerStatManager playerStatManager, int selectedPlayerStats)
@@ -91,9 +92,16 @@ namespace wpfPresentation
             int newPlayerID = Int32.Parse(playerID);
             double newStatAmount = Double.Parse(statAmount);
 
+           
+
             try
             {
-                if (_playerStatManager.InsertNewPlayerStat(newPlayerID, statName, seasonID, newStatAmount))
+                _stats.PlayerID = newPlayerID;
+                _stats.StatName = statName;
+                _stats.SeasonID = seasonID;
+                _stats.StatAmount = newStatAmount;
+
+                if (_playerStatManager.InsertNewPlayerStat(_stats))
                 {
                     this.DialogResult = true;
                 }

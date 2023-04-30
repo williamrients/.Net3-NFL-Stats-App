@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-C:\school-spring2023\.net3\.Net3-NFL-Stats-App\NFLStatsApp\wpfPresentation\obj\Debug\
+D:\spring2023\dotNet\.Net3-NFL-Stats-App\NFLStatsApp\wpfPresentation\obj\Debug\
 wpfPresentation
 none
 false
 DEBUG;TRACE
-C:\school-spring2023\.net3\.Net3-NFL-Stats-App\NFLStatsApp\wpfPresentation\App.xaml
+D:\spring2023\dotNet\.Net3-NFL-Stats-App\NFLStatsApp\wpfPresentation\App.xaml
 6-581373838
 
 101539675134
-16-1305990900
+1663638042
 AboutWindow.xaml;InsertNewPlayer.xaml;InsertNewPlayerStat.xaml;InsertNewUserAndRole.xaml;MainWindow.xaml;UpdatePasswordWindow.xaml;
 
 False

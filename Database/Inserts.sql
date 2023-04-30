@@ -82,7 +82,9 @@ GO
 INSERT INTO [dbo].[season]
 	([seasonID])
 	VALUES
-	('2021-2022')
+	('2020-2021'),
+	('2021-2022'),
+	('2022-2023')
 GO
 
 

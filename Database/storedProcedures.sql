@@ -356,9 +356,9 @@ CREATE PROCEDURE [dbo].[sp_select_player_by_player_id]
 )
 AS
 	BEGIN
-		SELECT playerID, givenName, familyName, yearDrafted, active, teamName, espnID
-		FROM player
-		WHERE playerID = @PlayerId
+		SELECT 	[playerID], [givenName], [familyName], [yearDrafted], [active], [teamName], [espnID]
+		FROM 	[player]
+		WHERE 	[playerID] = @PlayerId
 	END
 GO
 
@@ -401,3 +401,48 @@ AS
 		FROM	[Season]
 	END
 GO
+
+print '' print '*** Creating sp_select_stat_by_playerID_seasonID_and_statName'
+GO
+CREATE PROCEDURE [sp_select_stat_by_playerID_seasonID_and_statName]
+	(
+		@PlayerID	[int],
+		@SeasonID	[nvarchar] (9),
+		@statName	[nvarchar] (50)
+	)
+AS
+	BEGIN
+		SELECT	[playerID], [statName], [seasonID], [statAmount]
+		FROM	[playerStat]
+		WHERE	@PlayerID = [playerID]
+		AND		@SeasonID = [seasonID]
+		AND 	@StatName = [statName]
+	END
+GO
+
+print '' print '*** Creating sp_update_stat_by_playerID_seasonID_and_statName'
+GO
+CREATE PROCEDURE [sp_update_stat_by_playerID_seasonID_and_statName]
+	(
+		@PlayerID		[int],
+		
+		@SeasonID		[nvarchar] (9),
+		@StatName		[nvarchar] (50),
+		@StatAmount		[float],
+		
+		@OldSeasonID	[nvarchar] (9),
+		@OldStatName	[nvarchar] (50),
+		@OldStatAmount	[float]
+	)
+AS
+	BEGIN
+		UPDATE 	[playerStat]
+		SET		[statAmount] = @StatAmount
+		WHERE	[PlayerID] = @PlayerID
+		AND		[SeasonID] = @OldSeasonID
+		AND		[StatName] = @OldStatName
+		AND 	[StatAmount] = @OldStatAmount
+		
+		RETURN @@ROWCOUNT
+	END
+GO	
