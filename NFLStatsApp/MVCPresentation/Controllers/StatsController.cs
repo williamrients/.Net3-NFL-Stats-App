@@ -12,8 +12,10 @@ namespace MVCPresentation.Controllers
 {
     public class StatsController : Controller
     {
-        IPlayerStatManager _statManager = null;
-        IPlayerManager _playerManager = null;
+        private IPlayerStatManager _statManager = null;
+        private IPlayerManager _playerManager = null;
+        private IEnumerable<Stats> stats;
+        private IEnumerable<Stats> playerStats;
         private IEnumerable<String> _statsDDL;
         private IEnumerable<String> _seasonIDsDDL;
 
@@ -36,8 +38,15 @@ namespace MVCPresentation.Controllers
         // GET: Stats
         public ActionResult Index()
         {
-            IEnumerable<Stats> stats = _statManager.GetAllPlayerStatsByActive(true);
-
+            try
+            {
+                stats = _statManager.GetAllPlayerStatsByActive(true);
+            }
+            catch (Exception ex)
+            {
+                ViewBag.ErrorMessage = "Error retrieving player stats\n" + ex.Message;
+                return View("Error");
+            }
             return View(stats);
         }
 
@@ -48,9 +57,16 @@ namespace MVCPresentation.Controllers
             {
                 return RedirectToAction("Index");
             }
-            IEnumerable<Stats> stats = _statManager.GetAllPlayerStatsByPlayerID((int)playerID);
-
-            return View(stats);
+            try
+            {
+                playerStats = _statManager.GetAllPlayerStatsByPlayerID((int)playerID);
+            }
+            catch (Exception ex)
+            {
+                ViewBag.ErrorMessage = "Error retrieving players stats\n" + ex.Message;
+                return View("Error");
+            }
+            return View(playerStats);
         }
 
         // GET: Stats/Create
@@ -71,10 +87,9 @@ namespace MVCPresentation.Controllers
             }
             catch (Exception ex)
             {
-                throw ex;
+                ViewBag.ErrorMessage = "Error retrieving player that ID\n" + ex.Message;
+                return View("Error");
             }
-
-            
         }
 
         // POST: Stats/Create
@@ -105,7 +120,8 @@ namespace MVCPresentation.Controllers
             }
             catch (Exception ex)
             {
-                throw ex;
+                ViewBag.ErrorMessage = "Error creating player stat\n" + ex.Message;
+                return View("Error");
             }
         }
 
@@ -140,8 +156,8 @@ namespace MVCPresentation.Controllers
             }
             catch (Exception ex)
             {
-                ViewBag.Message = ex.Message;
-                return View();
+                ViewBag.ErrorMessage = "Error editing player stat\n" + ex.Message;
+                return View("Error");
             }
         }
     }

@@ -11,8 +11,10 @@ namespace MVCPresentation.Controllers
 {
     public class PlayersController : Controller
     {
-        IPlayerManager _playerManager = null;
-        ITeamsManager _teamManager = null;
+        private IPlayerManager _playerManager = null;
+        private ITeamsManager _teamManager = null;
+        private IEnumerable<Players> allPlayers;
+        private IEnumerable<Players> playerList;
         private IEnumerable<String> _teamsDDL;
 
         public PlayersController()
@@ -23,18 +25,25 @@ namespace MVCPresentation.Controllers
             {
                 _teamsDDL = _teamManager.RetrieveAllTeamNames();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                // direct to error page
-                throw;
+                ViewBag.ErrorMessage = ex.Message;
+                Redirect("Error");
             }
         }
 
         // GET: Players
         public ActionResult Index()
         {
-            IEnumerable<Players> allPlayers = _playerManager.GetAllPlayersByActive(true);
-
+            try
+            {
+                allPlayers = _playerManager.GetAllPlayersByActive(true);
+            }
+            catch (Exception ex)
+            {
+                ViewBag.ErrorMessage = "Error retrieving players\n" + ex.Message;
+                return View("Error");
+            }
             return View(allPlayers); 
         }
 
@@ -65,14 +74,15 @@ namespace MVCPresentation.Controllers
                 }
                 catch (Exception ex)
                 {
-                    throw ex;
+                    ViewBag.ErrorMessage = "Error creating a new player\n" + ex.Message;
+                    return View("Error");
                 }
             }
             return View(player);
         }
 
         // GET: Players/Edit/5
-        public ActionResult Edit(int playerID)
+        public ActionResult Edit(int? playerID)
         {
             if (playerID == null || playerID == 0)
             {
@@ -81,13 +91,14 @@ namespace MVCPresentation.Controllers
 
             try
             {
-                Players player = _playerManager.GetPlayerByPlayerID(playerID);
+                Players player = _playerManager.GetPlayerByPlayerID((int)playerID);
                 ViewBag.teamsDDL = _teamsDDL;
                 return View(player);
             }
             catch (Exception ex)
             {
-                throw ex;
+                ViewBag.ErrorMessage = "Error retrieving player with that ID\n" + ex.Message;
+                return View("Error");
             }
         }
 
@@ -103,22 +114,29 @@ namespace MVCPresentation.Controllers
             }
             catch (Exception ex)
             {
-                ViewBag.ErrorMessage = ex.Message;
-                return View(player);
+                ViewBag.ErrorMessage = "Error editing player\n" + ex.Message;
+                return View("Error");
             }
         }
 
         // GET: Players By Team
         public ActionResult PlayersOnTeam(string teamName)
         {
-            if (teamName == null)
+            
+            if (teamName != null && teamName != "")
             {
-                RedirectToAction("Index");
+                try
+                {
+                    playerList = _playerManager.GetAllPlayersByTeamName(teamName);
+                    return View(playerList);
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.ErrorMessage = "Error retrieving players on that team\n" + ex.Message;
+                    return View("Error");
+                }
             }
-
-            IEnumerable<Players> playerList = _playerManager.GetAllPlayersByTeamName(teamName); 
-
-            return View(playerList); 
+            return RedirectToAction("Index", "Teams");
         }
 
     }

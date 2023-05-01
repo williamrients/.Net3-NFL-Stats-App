@@ -4,54 +4,75 @@
     ViewBag.Title = "Stats";
 }
 
-<h2>Index</h2>
+<style>
+    ﻿h2 {
+        color: #1c6758;
+        font-size: 25px;
+        font-weight: 600;
+        margin: 20px;
+    }
+
+    table {
+        border-collapse: collapse;
+    }
+
+    tr th {
+        background-color: #013369;
+        color: white;
+    }
+
+    table td + td {
+        border-left: 1px solid black;
+    }
+
+    tr:nth-child(even) {
+        background-color: #edede9;
+        color: black;
+    }
+
+    tr:nth-child(odd) {
+        background-color: white;
+        color: black;
+    }
+</style>
+
+
+<h2>All Stats</h2>
 <h4>Showing @Model.Count()</h4>
 
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.PlayerID)
+            Season
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.GivenName)
+            Name
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.FamilyName)
+            Stat Name
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.StatName)
+            Amount
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.StatAmount)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Active)
-        </th>
-        <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.PlayerID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.GivenName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FamilyName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StatName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StatAmount)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Active)
-        </td>
-       
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SeasonID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GivenName) @Html.DisplayFor(modelItem => item.FamilyName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StatName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StatAmount)
+            </td>
+
+        </tr>
+    }
 
 </table>

@@ -486,8 +486,6 @@ C:\school-spring2023\.net3\.Net3-NFL-Stats-App\NFLStatsApp\MVCPresentation\obj\D
 C:\school-spring2023\.net3\.Net3-NFL-Stats-App\NFLStatsApp\MVCPresentation\obj\Debug\MVCPresentation.csproj.CopyComplete
 C:\school-spring2023\.net3\.Net3-NFL-Stats-App\NFLStatsApp\MVCPresentation\obj\Debug\MVCPresentation.dll
 C:\school-spring2023\.net3\.Net3-NFL-Stats-App\NFLStatsApp\MVCPresentation\obj\Debug\MVCPresentation.pdb
-D:\spring2023\dotNet\.Net3-NFL-Stats-App\NFLStatsApp\MVCPresentation\bin\System.Web.Mvc.xml
-D:\spring2023\dotNet\.Net3-NFL-Stats-App\NFLStatsApp\MVCPresentation\bin\System.Web.WebPages.Razor.xml
 D:\spring2023\dotNet\.Net3-NFL-Stats-App\NFLStatsApp\MVCPresentation\bin\MVCPresentation.dll.config
 D:\spring2023\dotNet\.Net3-NFL-Stats-App\NFLStatsApp\MVCPresentation\bin\MVCPresentation.dll
 D:\spring2023\dotNet\.Net3-NFL-Stats-App\NFLStatsApp\MVCPresentation\bin\MVCPresentation.pdb
@@ -578,10 +576,12 @@ D:\spring2023\dotNet\.Net3-NFL-Stats-App\NFLStatsApp\MVCPresentation\bin\LogicLa
 D:\spring2023\dotNet\.Net3-NFL-Stats-App\NFLStatsApp\MVCPresentation\bin\EntityFramework.xml
 D:\spring2023\dotNet\.Net3-NFL-Stats-App\NFLStatsApp\MVCPresentation\bin\EntityFramework.SqlServer.xml
 D:\spring2023\dotNet\.Net3-NFL-Stats-App\NFLStatsApp\MVCPresentation\bin\System.Web.Helpers.xml
+D:\spring2023\dotNet\.Net3-NFL-Stats-App\NFLStatsApp\MVCPresentation\bin\System.Web.Mvc.xml
 D:\spring2023\dotNet\.Net3-NFL-Stats-App\NFLStatsApp\MVCPresentation\bin\System.Web.Optimization.xml
 D:\spring2023\dotNet\.Net3-NFL-Stats-App\NFLStatsApp\MVCPresentation\bin\System.Web.Razor.xml
 D:\spring2023\dotNet\.Net3-NFL-Stats-App\NFLStatsApp\MVCPresentation\bin\System.Web.WebPages.xml
 D:\spring2023\dotNet\.Net3-NFL-Stats-App\NFLStatsApp\MVCPresentation\bin\System.Web.WebPages.Deployment.xml
+D:\spring2023\dotNet\.Net3-NFL-Stats-App\NFLStatsApp\MVCPresentation\bin\System.Web.WebPages.Razor.xml
 D:\spring2023\dotNet\.Net3-NFL-Stats-App\NFLStatsApp\MVCPresentation\bin\Newtonsoft.Json.xml
 D:\spring2023\dotNet\.Net3-NFL-Stats-App\NFLStatsApp\MVCPresentation\bin\Antlr3.Runtime.pdb
 D:\spring2023\dotNet\.Net3-NFL-Stats-App\NFLStatsApp\MVCPresentation\bin\Microsoft.AspNet.Identity.Core.xml

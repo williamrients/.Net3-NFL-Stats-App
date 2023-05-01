@@ -273,7 +273,7 @@ CREATE PROCEDURE [dbo].[sp_select_stats_by_active]
 )
 AS
 	BEGIN
-		SELECT	[player].[playerID], [givenName], [familyName], [active], [playerStat].[statName], [statAmount]
+		SELECT	[player].[playerID], [givenName], [familyName], [active], [playerStat].[statName], [statAmount], [seasonID]
 		FROM	[player] JOIN [playerStat]
 				ON [player].[playerID] = [playerStat].[playerID]
 				JOIN [stat] ON [stat].[statName] = [playerStat].[statName]

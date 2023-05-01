@@ -159,6 +159,7 @@ namespace DataAccessLayer
                         playerStats.Active = reader.GetBoolean(3);
                         playerStats.StatName = reader.GetString(4);
                         playerStats.StatAmount = reader.GetDouble(5);
+                        playerStats.SeasonID = reader.GetString(6);
                         allPlayerStats.Add(playerStats);
                     }
                 }

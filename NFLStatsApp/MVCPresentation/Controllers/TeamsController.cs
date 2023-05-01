@@ -11,24 +11,29 @@ namespace MVCPresentation.Controllers
 {
     public class TeamsController : Controller
     {
-        ITeamsManager _teamManger = null;
+        private ITeamsManager _teamManger = null;        
+        private IEnumerable<Teams> allTeams;
+        private Teams oldTeam;
+        private Teams team;
 
         public TeamsController()
         {
             _teamManger = new TeamManager();
         }
 
-        public TeamsController(ITeamsManager teamsManager)
-        {
-            _teamManger = teamsManager;
-        }
-
         // GET: Teams
         public ViewResult Index()
         {
-            IEnumerable<Teams> allTeams = _teamManger.GetAllTeamsByActive(true);
-
-            return View(allTeams);
+            try
+            {
+                allTeams = _teamManger.GetAllTeamsByActive(true);
+                return View(allTeams);
+            }
+            catch (Exception ex)
+            {
+                ViewBag.ErrorMessage = "Error retrieving teams\n" + ex.Message;
+                return View("Error");
+            }
         }
 
         // GET: Teams/Details/5
@@ -38,9 +43,17 @@ namespace MVCPresentation.Controllers
             {
                 return RedirectToAction("Index");
             }
-            Teams teams = _teamManger.RetrieveTeamByTeamName(teamName);
 
-            return View(teams);
+            try
+            {
+                team = _teamManger.RetrieveTeamByTeamName(teamName);
+                return View(team);
+            }
+            catch (Exception ex)
+            {
+                ViewBag.ErrorMessage = "Error retrieving team\n" + ex.Message;
+                return View("Error");
+            }
         }
 
         // GET: Teams/Edit/5
@@ -50,8 +63,6 @@ namespace MVCPresentation.Controllers
             {
                 return RedirectToAction("Index");
             }
-            
-
             return View();
         }
 
@@ -63,41 +74,20 @@ namespace MVCPresentation.Controllers
             {
                 try
                 {
-                    Teams oldTeam = _teamManger.RetrieveTeamByTeamName(teamName);
+                    oldTeam = _teamManger.RetrieveTeamByTeamName(teamName);
                     _teamManger.UpdateTeam(oldTeam, team);
 
                     return RedirectToAction("Index");
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    return View();
+                    ViewBag.ErrorMessage = "Error editing team\n" + ex.Message;
+                    return View("Error");
                 }
             }
             else
             {
                 return View(team);
-            }
-        }
-
-        // GET: Teams/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Teams/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
             }
         }
     }

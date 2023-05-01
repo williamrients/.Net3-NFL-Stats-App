@@ -4,42 +4,50 @@
     ViewBag.Title = "Players On Team";
 }
 
-<h2>Players on the @Model.First().TeamName</h2>
+@if (Model.Count() > 0)
+{
+    <h2>Players on the @Model.First().TeamName</h2>
 
-<p class="btn btn-default" style="margin: 5px;">
-    @Html.ActionLink("Add a Player", "Create")
-</p>
+    <p class="btn btn-default" style="margin: 5px;">
+        @Html.ActionLink("Add a Player", "Create")
+    </p>
 
-<div class="container">
-    <div class="row">
-        @foreach (var player in Model)
-        {
-            <div class="col-sm-12 col-md-6 col-lg-4">
-                <div class="panel panel-default">
-                    @if (player.EspnID != null)
-                    {
-                        <img class="panel-heading" style="max-width: 100%; height: auto;" src='https://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/@(player.EspnID+".png&w=350&h=254")' />
-                    }
-                    else if (player.EspnID == null)
-                    {
-                        <img class="panel-heading" style="max-width: 100%; height: 260px;" src="https://www.playerprofiler.com/wp-content/uploads/2014/05/HeadshotSilhouette6.png" />
-                    }
-                    <div class="panel-body">
-                        Name: @player.GivenName @player.FamilyName
-                        <br /> <br />
-                        Year Drafted: @player.YearDrafted
+    <div class="container">
+        <div class="row">
+            @foreach (var player in Model)
+            {
+                <div class="col-sm-12 col-md-6 col-lg-4">
+                    <div class="panel panel-default">
+                        @if (player.EspnID != null)
+                        {
+                            <img class="panel-heading" style="max-width: 100%; height: auto;" src='https://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/@(player.EspnID+".png&w=350&h=254")' />
+                        }
+                        else if (player.EspnID == null)
+                        {
+                            <img class="panel-heading" style="max-width: 100%; height: 260px;" src="https://www.playerprofiler.com/wp-content/uploads/2014/05/HeadshotSilhouette6.png" />
+                        }
+                        <div class="panel-body">
+                            Name: @player.GivenName @player.FamilyName
+                            <br /> <br />
+                            Year Drafted: @player.YearDrafted
+                        </div>
+                        <div class="btn btn-default" style="margin: 0 0 10px 10px;">@Html.ActionLink("Stats", "Details", "Stats", new { playerID = player.PlayerID }, new { @class = "" })</div>
+                        <div class="btn btn-default" style="margin: 0 0 10px 10px;">@Html.ActionLink("Edit", "Edit", new { playerID = player.PlayerID })</div>
                     </div>
-                    <div class="btn btn-default" style="margin: 0 0 10px 10px;">@Html.ActionLink("Stats", "Details", "Stats", new { playerID = player.PlayerID }, new { @class = "" })</div>
-                    <div class="btn btn-default" style="margin: 0 0 10px 10px;">@Html.ActionLink("Edit", "Edit", new { playerID = player.PlayerID })</div>
                 </div>
-            </div>
-        }
+            }
+        </div>
     </div>
-</div>
+}
+else
+{
+    <h2>No Players on this team</h2>
+}
+
 
 
 @*
-@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-@Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-    *@
+    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+*@
