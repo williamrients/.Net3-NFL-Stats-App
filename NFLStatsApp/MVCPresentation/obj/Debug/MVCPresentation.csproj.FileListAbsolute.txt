@@ -608,3 +608,4 @@ D:\spring2023\dotNet\.Net3-NFL-Stats-App\NFLStatsApp\MVCPresentation\obj\Debug\M
 D:\spring2023\dotNet\.Net3-NFL-Stats-App\NFLStatsApp\MVCPresentation\obj\Debug\MVCPresentation.csproj.CopyComplete
 D:\spring2023\dotNet\.Net3-NFL-Stats-App\NFLStatsApp\MVCPresentation\obj\Debug\MVCPresentation.dll
 D:\spring2023\dotNet\.Net3-NFL-Stats-App\NFLStatsApp\MVCPresentation\obj\Debug\MVCPresentation.pdb
+D:\spring2023\dotNet\.Net3-NFL-Stats-App\NFLStatsApp\MVCPresentation\obj\Debug\MVCPresentation.g.resources
