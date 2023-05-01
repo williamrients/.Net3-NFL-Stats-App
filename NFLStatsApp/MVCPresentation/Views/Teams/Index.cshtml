@@ -17,9 +17,15 @@
                     <h4 class="panel-body">
                         @team.TeamCity @team.TeamName
                     </h4>
-                    <div class="btn btn-default" style="margin: 0 0 10px 10px;">@Html.ActionLink("Players", "PlayersOnTeam", "Players", new { teamName = team.TeamName }, new { @class = "" })</div>                    
-                    <div class="btn btn-default" style="margin: 0 0 10px 10px;">@Html.ActionLink("Edit", "Edit", new { teamName = team.TeamName })</div>
+                    @if (this.User.Identity.IsAuthenticated)
+                    {
+                        <div class="btn btn-default" style="margin: 0 0 10px 10px;">@Html.ActionLink("Players", "PlayersOnTeam", "Players", new { teamName = team.TeamName }, new { @class = "" })</div>
+                    }
                     <div class="btn btn-default" style="margin: 0 0 10px 10px;">@Html.ActionLink("Details", "Details", new { teamName = team.TeamName })</div>
+                    @if (this.User.IsInRole("Admin") || this.User.IsInRole("Administrator") || this.User.IsInRole("StatAdjuster"))
+                    {
+                        <div class="btn btn-default" style="margin: 0 0 10px 10px;">@Html.ActionLink("Edit", "Edit", new { teamName = team.TeamName })</div>
+                    }
                 </div>
             </div>
          }

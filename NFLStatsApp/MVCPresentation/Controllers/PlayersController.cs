@@ -54,6 +54,7 @@ namespace MVCPresentation.Controllers
         }
 
         // GET: Players/Create
+        [Authorize(Roles = "Admin, Administrator, StatAdjuster")]
         public ActionResult Create()
         {
             ViewBag.teamsDDL = _teamsDDL;
@@ -82,6 +83,7 @@ namespace MVCPresentation.Controllers
         }
 
         // GET: Players/Edit/5
+        [Authorize(Roles = "Admin, Administrator, StatAdjuster")]
         public ActionResult Edit(int? playerID)
         {
             if (playerID == null || playerID == 0)
@@ -120,6 +122,7 @@ namespace MVCPresentation.Controllers
         }
 
         // GET: Players By Team
+        [Authorize]
         public ActionResult PlayersOnTeam(string teamName)
         {
             

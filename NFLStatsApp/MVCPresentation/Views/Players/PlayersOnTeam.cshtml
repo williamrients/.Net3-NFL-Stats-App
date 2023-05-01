@@ -8,10 +8,12 @@
 {
     <h2>Players on the @Model.First().TeamName</h2>
 
+    if (this.User.IsInRole("Admin") || this.User.IsInRole("Administrator") || this.User.IsInRole("StatAdjuster"))
+    {
     <p class="btn btn-default" style="margin: 5px;">
         @Html.ActionLink("Add a Player", "Create")
     </p>
-
+    }
     <div class="container">
         <div class="row">
             @foreach (var player in Model)
@@ -32,7 +34,11 @@
                             Year Drafted: @player.YearDrafted
                         </div>
                         <div class="btn btn-default" style="margin: 0 0 10px 10px;">@Html.ActionLink("Stats", "Details", "Stats", new { playerID = player.PlayerID }, new { @class = "" })</div>
-                        <div class="btn btn-default" style="margin: 0 0 10px 10px;">@Html.ActionLink("Edit", "Edit", new { playerID = player.PlayerID })</div>
+                        @if (this.User.IsInRole("Admin") || this.User.IsInRole("Administrator") || this.User.IsInRole("StatAdjuster"))
+                        {
+                            <div class="btn btn-default" style="margin: 0 0 10px 10px;">@Html.ActionLink("Edit", "Edit", new { playerID = player.PlayerID })</div>
+                        }
+
                     </div>
                 </div>
             }

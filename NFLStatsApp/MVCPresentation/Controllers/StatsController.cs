@@ -10,6 +10,7 @@ using MVCPresentation.Models;
 
 namespace MVCPresentation.Controllers
 {
+    [Authorize]
     public class StatsController : Controller
     {
         private IPlayerStatManager _statManager = null;
@@ -70,6 +71,7 @@ namespace MVCPresentation.Controllers
         }
 
         // GET: Stats/Create
+        [Authorize(Roles = "Admin, Administrator, StatAdjuster")]
         public ActionResult Create(int? playerID)
         {
             if (playerID == null || playerID == 0)
@@ -126,6 +128,7 @@ namespace MVCPresentation.Controllers
         }
 
         // GET: Stats/Edit/5
+        [Authorize(Roles = "Admin, Administrator, StatAdjuster")]
         public ActionResult Edit(int playerID, string statName, string seasonID)
         {
             Stats stats = new Stats()

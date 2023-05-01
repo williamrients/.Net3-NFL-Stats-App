@@ -54,6 +54,9 @@
         <th>
             Amount
         </th>
+        <th>
+            Details
+        </th>
     </tr>
 
     @foreach (var item in Model)
@@ -70,6 +73,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.StatAmount)
+            </td>
+            <td>
+                <div class="btn btn-default" style="margin: 0 0 10px 10px;">@Html.ActionLink("Details", "Details", "Stats", new { playerID = item.PlayerID }, new { @class = "" })</div>
             </td>
 
         </tr>

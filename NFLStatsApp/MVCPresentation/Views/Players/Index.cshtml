@@ -6,9 +6,13 @@
 
 <h2>All Players</h2>
 <h4>Showing @Model.Count()</h4>
-<p class="btn btn-default" style="margin: 5px;">
-    @Html.ActionLink("New Player", "Create")
-</p>
+@if (this.User.IsInRole("Admin") || this.User.IsInRole("Administrator") || this.User.IsInRole("StatAdjuster"))
+{
+    <p class="btn btn-default" style="margin: 5px;">
+        @Html.ActionLink("New Player", "Create")
+    </p>
+}
+
 
 <div class="container">
     <div class="row">
@@ -31,13 +35,18 @@
                         Team: @player.TeamName
                         <br /> <br />
                         Year Drafted: @player.YearDrafted
-                        <br /> <br />
-                        Player ID: @player.PlayerID
                     </div>
-                    <div class="btn btn-default" style="margin: 0 0 10px 10px;">@Html.ActionLink("Stats", "Details", "Stats", new { playerID = player.PlayerID }, new { @class = "" })</div>
-                    <div class="btn btn-default" style="margin: 0 0 10px 10px;">@Html.ActionLink("Edit", "Edit", new { playerID = player.PlayerID })</div>
+                    @if (this.User.Identity.IsAuthenticated)
+                    {
+                        <div class="btn btn-default" style="margin: 0 0 10px 10px;">@Html.ActionLink("Stats", "Details", "Stats", new { playerID = player.PlayerID }, new { @class = "" })</div>
+                    }
+                    @if (this.User.IsInRole("Admin") || this.User.IsInRole("Administrator") || this.User.IsInRole("StatAdjuster"))
+                    {
+                        <div class="btn btn-default" style="margin: 0 0 10px 10px;">@Html.ActionLink("Edit", "Edit", new { playerID = player.PlayerID })</div>
+                        <div class="btn btn-default" style="margin: 0 0 10px 10px;">@Html.ActionLink("New Stat", "Create", "Stats", new { playerID = player.PlayerID }, new { @class = "" })</div>
+                    }
                     <div class="btn btn-default" style="margin: 0 0 10px 10px;">@Html.ActionLink("Team", "Details", "Teams", new { teamName = player.TeamName }, new { @class = "" })</div>
-                    <div class="btn btn-default" style="margin: 0 0 10px 10px;">@Html.ActionLink("New Stat", "Create", "Stats", new { playerID = player.PlayerID}, new { @class = ""})</div>
+
                 </div>
             </div>
         }

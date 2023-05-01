@@ -39,24 +39,27 @@ namespace MVCPresentation.Controllers
         // GET: Teams/Details/5
         public ActionResult Details(string teamName)
         {
-            if (teamName == null)
+            if (teamName != null && teamName != "")
             {
-                return RedirectToAction("Index");
+                try
+                {
+                    team = _teamManger.RetrieveTeamByTeamName(teamName);
+                    if (team.TeamName != null)
+                    {
+                        return View(team);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.ErrorMessage = "Error retrieving team\n" + ex.Message;
+                    return View("Error");
+                }
             }
-
-            try
-            {
-                team = _teamManger.RetrieveTeamByTeamName(teamName);
-                return View(team);
-            }
-            catch (Exception ex)
-            {
-                ViewBag.ErrorMessage = "Error retrieving team\n" + ex.Message;
-                return View("Error");
-            }
+            return RedirectToAction("Index");
         }
 
         // GET: Teams/Edit/5
+        [Authorize(Roles = "Admin, Administrator, StatAdjuster")]
         public ActionResult Edit(string teamName)
         {
             if (teamName == null)
