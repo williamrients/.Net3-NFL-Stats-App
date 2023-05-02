@@ -2,8 +2,6 @@ USE [Football_Stats_db]
 
 print '' print '*** CREATING STORED PROCEDURES'
 
-/* User Related */
-
 print '' print '*** creating sp_check_user'
 GO
 CREATE PROCEDURE [dbo].[sp_check_user]
@@ -69,7 +67,6 @@ AS
 	END
 GO
 
-/* Select Users by Active*/
 print '' print '** creating sp_select_users_by_active'
 GO
 CREATE PROCEDURE [dbo].[sp_select_users_by_active]
@@ -86,7 +83,6 @@ AS
 	END
 GO
 
-/* Insert New User and Role*/
 print '' print '** creating sp_insert_new_user_and_role'
 GO
 CREATE PROCEDURE [dbo].[sp_insert_new_user_and_role]
@@ -115,7 +111,6 @@ AS
 	END
 GO
 
-/* Insert New User */
 print '' print '** creating sp_insert_new_user'
 GO
 CREATE PROCEDURE [dbo].[sp_insert_new_user]
@@ -137,7 +132,6 @@ AS
 	END
 GO
 
-/* Select All Roles*/
 print '' print '** creating sp_select_all_roles'
 GO
 CREATE PROCEDURE [dbo].[sp_select_all_roles]
@@ -179,8 +173,6 @@ AS
 		(@userid, @roleID)
 	END
 GO
-
-/* Team Related */
 
 print '' print '*** creating sp_select_all_active_teams'
 GO
@@ -248,8 +240,6 @@ AS
 		FROM	[Team]
 	END
 GO
-
-/* Player Related */
 
 print '' print '*** creating sp_select_all_active_players'
 GO
@@ -445,4 +435,21 @@ AS
 		
 		RETURN @@ROWCOUNT
 	END
-GO	
+GO
+
+print '' print '*** Creating sp_select_schedule_by_season_and_week'
+GO
+CREATE PROCEDURE [sp_select_schedule_by_season]
+	(
+		@seasonID		[nvarchar] (9),
+		@WeekNumber		[int]
+	)
+AS
+	BEGIN
+		SELECT	[gameID], [teamNameAway], [teamNameHome], [teamAwayScore], [teamHomeScore]
+				[WeekNumber], [seasonID], [OverTime], [GameDate]
+		FROM	[teamSchedule]
+		WHERE	@seasonID = [SeasonID]
+		AND		@WeekNumber = [WeekNumber]
+	END
+GO

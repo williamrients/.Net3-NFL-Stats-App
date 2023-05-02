@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="IPlayerManager.cs" />
     <Compile Include="IPlayerStatManager.cs" />
+    <Compile Include="IScheduleManager.cs" />
     <Compile Include="ITeamsManager.cs" />
     <Compile Include="IUsermanager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

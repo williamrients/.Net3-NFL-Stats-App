@@ -45,6 +45,7 @@
     <Compile Include="PlayerAccessor.cs" />
     <Compile Include="PlayerStatAccessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ScheduleAccessor.cs" />
     <Compile Include="TeamsAccessor.cs" />
     <Compile Include="Useraccessor.cs" />
   </ItemGroup>

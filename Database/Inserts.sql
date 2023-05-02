@@ -202,15 +202,6 @@ INSERT INTO [dbo].[stat]
 	
 GO
 
--- /* Team Season test records */
--- print '' print '*** inserting teamSeason test records'
--- GO
--- INSERT INTO [dbo].[teamSeason]
-	-- ([teamName], [seasonID], [playerID])
-	-- VALUES
-	-- ('Buccaneers', '2021-2022', 100000)
--- GO
-
 /* Player Position test records */
 print '' print '*** inserting playerPosition test records'
 GO
@@ -619,4 +610,20 @@ INSERT INTO [dbo].[playerStat]
 	(100073		, 'Receptions'				, '2021-2022'	, 69),
 	(100073		, 'Receiving Yards'			, '2021-2022'	, 920),
 	(100073		, 'Receiving Touchdowns'	, '2021-2022'	, 7)
+GO
+
+/* Team Schedule test records */
+print '' print '*** inserting season test records'
+GO
+INSERT INTO [dbo].[teamSchedule]
+	([teamNameAway], [teamNameHome], [teamAwayScore], [teamHomeScore],
+	[WeekNumber], [seasonID], [OverTime], [GameDate])
+	VALUES
+	('Cowboys'		, 'Buccaneers'	, 29	, 31, 	1	, '2021-2022'	, 0		, 2021-09-09),
+	('Jaguars'		, 'Texans'		, 21	, 37, 	1	, '2021-2022'	, 0		, 2021-09-12),
+	('Chargers'		, 'Commanders'	, 20	, 16, 	1	, '2021-2022'	, 0		, 2021-09-12),
+	('Seahawks'		, 'Colts'		, 28	, 16, 	1	, '2021-2022'	, 0		, 2021-09-12),
+	('Jets'			, 'Panthers'	, 14	, 19, 	1	, '2021-2022'	, 0		, 2021-09-12),
+	('Vikings'		, 'Bengals'		, 24	, 27, 	1	, '2021-2022'	, 1		, 2021-09-12),
+	('Cardinals'	, 'Titans'		, 38	, 13, 	1	, '2021-2022'	, 1		, 2021-09-12)
 GO

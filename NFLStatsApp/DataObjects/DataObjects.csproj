@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Players.cs" />
+    <Compile Include="Schedule.cs" />
     <Compile Include="Stats.cs" />
     <Compile Include="Teams.cs" />
     <Compile Include="Users.cs" />

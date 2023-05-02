@@ -119,21 +119,27 @@ CREATE TABLE [dbo].[stat] (
 GO
 
 /* Team Season table */
--- print '' print '*** creating teamSeason table'
--- GO
--- CREATE TABLE [dbo].[teamSeason] (
-	-- [teamName]			[nvarchar] (50)			NOT NULL,
-	-- [seasonID]			[nvarchar] (9)			NOT NULL,
-	-- [playerID]			[int]					NOT NULL,
-	-- CONSTRAINT [fk_teamSeason_teamName]		FOREIGN KEY ([teamName])
-		-- REFERENCES [dbo].[team] ([teamName]),
-	-- CONSTRAINT [fk_teamSeason_seasonID]		FOREIGN KEY ([seasonID])
-		-- REFERENCES [dbo].[season] ([seasonID]),
-	-- CONSTRAINT [fk_teamSeason_playerID]		FOREIGN KEY ([playerID])
-		-- REFERENCES [dbo].[player] ([playerID]),
-	-- CONSTRAINT [pk_teamSeason] PRIMARY KEY ([teamName], [seasonID], [playerID])
--- )
--- GO
+ print '' print '*** creating teamSchedule table'
+ GO
+ CREATE TABLE [dbo].[teamSchedule] (
+	[gameID]			[int] IDENTITY(100000,1)	NOT NULL,
+	[teamNameAway]		[nvarchar]	(50)			NOT NULL,
+	[teamNameHome]		[nvarchar]	(50)			NOT NULL,
+	[teamAwayScore]		[int]						NULL,
+	[teamHomeScore]		[int]						NULL,
+	[WeekNumber]		[int]						NOT NULL,
+	[seasonID]			[nvarchar] (9)				NOT NULL,	
+	[OverTime]			[bit]						NULL,	
+	[GameDate]			[datetime]					NOT NULL,
+	CONSTRAINT [pk_gameID] PRIMARY KEY([gameID]),
+	CONSTRAINT [fk_teamSchedule_teamNameAway]	FOREIGN KEY ([teamNameAway])
+		REFERENCES [dbo].[team] ([teamName]),
+	CONSTRAINT [fk_teamSchedule_teamNameHome]	FOREIGN KEY ([teamNameHome])
+		REFERENCES [dbo].[team] ([teamName]),
+	CONSTRAINT [fk_teamSchedule_seasonID]	FOREIGN KEY ([seasonID])
+		REFERENCES [dbo].[season] ([seasonID])
+	)
+	GO
 
 /* Player Position table */
 print '' print '*** creating playerPosition table'
