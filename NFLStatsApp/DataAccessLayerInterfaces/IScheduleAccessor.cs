@@ -10,5 +10,6 @@ namespace DataAccessLayerInterfaces
     public interface IScheduleAccessor
     {
         List<Schedule> SelectScheduleBySeasonIDAndWeekNumber(string seasonID, int weekNumber);
+        List<int> SelectDistinctWeeks();
     }
 }

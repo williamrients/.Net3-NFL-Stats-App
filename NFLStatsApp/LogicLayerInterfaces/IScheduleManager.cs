@@ -10,5 +10,6 @@ namespace LogicLayerInterfaces
     public interface IScheduleManager
     {
         List<Schedule> RetrieveScheduleBySeasonIDAndWeekNumber(string seasonID, int weekNumber);
+        List<int> RetrieveDistinctWeeks();
     }
 }

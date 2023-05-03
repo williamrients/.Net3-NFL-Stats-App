@@ -1,0 +1,152 @@
+﻿@model MVCPresentation.Models.ScheduleModel
+
+@{
+    ViewBag.Title = "Schedule";
+}
+
+<style>
+    table {
+        border-collapse: collapse;
+        font-size: 16px;
+        border: solid 1px black;
+    }
+
+    tr th {
+        background-color: #013369;
+        color: white;
+    }
+
+    tr:nth-child(even) {
+        background-color: #edede9;
+        color: black;
+    }
+
+    tr:nth-child(odd) {
+        background-color: white;
+        color: black;
+    }
+</style>
+
+
+<h2>Schedule</h2>
+    @using (Html.BeginForm("Index", "Schedule", FormMethod.Get, new { @class = "" }))
+    {
+    @Html.AntiForgeryToken()
+
+    SelectList selectListSeason = new SelectList(ViewBag.SeasonDDL, "seasonID");
+    SelectList selectListWeek = new SelectList(ViewBag.WeekDDL, "weekNumber");
+
+    <div class="form-inline">
+        @Html.DropDownListFor(model => model.SeasonID, selectListSeason, new { @class = "form-control col-md-4 col-md-push-8" })
+
+        @Html.DropDownListFor(model => model.WeekNumberOption, selectListWeek, new { @class = "form-control col-md-4 col-md-push-8", style = "margin-left: 10px;" })
+
+        @*model => model.WeekNumberOption, new { @class = "form-control col-md-4 col-md-push-8", style = "margin-left: 10px;" }*@
+
+        <input type="submit" value="Search" class="btn btn-primary col-md-4 col-md-push-8" style="margin-left: 10px; width: 100px" />
+    </div>
+
+    }
+
+    @if (Model.schedules.Count() > 0)
+    {
+        <table class="table" style="margin-top: 60px;">
+            <tr>
+                <th style="text-align: center;">
+                    Outcome
+                </th>
+                <th style="text-align: right;">
+                    Away Team
+                </th>
+                <th style="text-align: center;">
+                    Score
+                </th>
+                <th style="text-align: left;">
+                    Home Team
+                </th>
+                <th style="text-align: center;">
+                    Date
+                </th>
+            </tr>
+            @foreach (var item in Model.schedules)
+            {
+                <tr>
+                    @if (item.GameDate < DateTime.Now)
+                    {
+                        if (item.OverTime == true)
+                        {
+                            <td style="text-align: center;">
+                                Final/OT
+                            </td>
+                        }
+                        else
+                        {
+                            <td style="text-align: center;">
+                                Final
+                            </td>
+                        }
+                    }
+                    else
+                    {
+                        <td style="text-align: center;">
+                            TBD
+                        </td>
+                    }
+                    <td style="text-align: right;">
+                        @item.TeamNameAway
+                    </td>
+                    <td style="text-align: center;">
+                        @item.TeamAwayScore @@ @item.TeamHomeScore
+                    </td>
+                    <td style="text-align: left;">
+                        @item.TeamNameHome
+                    </td>
+                    <td style="text-align: center;">
+                        @{
+                            switch (item.GameDate.Day)
+                            {
+                                case 1:
+                                case 21:
+                                case 31:
+                                    <text>
+                                        @item.GameDate.DayOfWeek,
+                                        @item.GameDate.ToString("MMMM")
+                                        @(item.GameDate.Day)st
+                                    </text>
+                                    break;
+                                case 2:
+                                case 22:
+                                    <text>
+                                        @item.GameDate.DayOfWeek,
+                                        @item.GameDate.ToString("MMMM")
+                                        @(item.GameDate.Day)nd
+                                    </text>
+                                    break;
+                                case 3:
+                                case 23:
+                                    <text>
+                                        @item.GameDate.DayOfWeek,
+                                        @item.GameDate.ToString("MMMM")
+                                        @(item.GameDate.Day)rd
+                                    </text>
+                                    break;
+                                default:
+                                    <text>
+                                        @item.GameDate.DayOfWeek,
+                                        @item.GameDate.ToString("MMMM")
+                                        @(item.GameDate.Day)th
+                                    </text>
+                                    break;
+                            }
+                        }
+                    </td>
+                </tr>
+            }
+
+        </table>
+    }
+    else
+    {
+        <h2>No Schedule available</h2>
+    }
+

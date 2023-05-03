@@ -12,6 +12,44 @@ namespace DataAccessLayer
 {
     public class ScheduleAccessor : IScheduleAccessor
     {
+        public List<int> SelectDistinctWeeks()
+        {
+            List<int> weekList = new List<int>();
+
+            var connectionFactory = new DBconnection();
+            var conn = connectionFactory.GetConnection();
+
+            var cmdText = "sp_select_distinct_weeks";
+
+            var cmd = new SqlCommand(cmdText, conn);
+
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            try
+            {
+                conn.Open();
+
+                var reader = cmd.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        weekList.Add(reader.GetInt32(0));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return weekList;
+        }
+
         public List<Schedule> SelectScheduleBySeasonIDAndWeekNumber(string seasonID, int weekNumber)
         {
             List<Schedule> scheduleList = new List<Schedule>();
@@ -19,7 +57,7 @@ namespace DataAccessLayer
             var connectionFactory = new DBconnection();
             var conn = connectionFactory.GetConnection();
 
-            var cmdText = "sp_select_all_active_players";
+            var cmdText = "sp_select_schedule_by_season_and_week";
 
             var cmd = new SqlCommand(cmdText, conn);
 
@@ -50,6 +88,7 @@ namespace DataAccessLayer
                             OverTime = reader.GetBoolean(7),
                             GameDate = reader.GetDateTime(8)
                         };
+                        scheduleList.Add(schedule);
                     }
                 }
             }

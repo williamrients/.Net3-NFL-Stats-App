@@ -75,9 +75,9 @@ namespace DataAccessLayer
                     }
                 }
             }
-            catch (Exception)
-            {
-                throw;
+            catch (Exception ex)
+            { 
+                throw ex;
             }
             finally
             {
@@ -113,9 +113,9 @@ namespace DataAccessLayer
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
             finally
             {

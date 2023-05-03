@@ -5,24 +5,18 @@
 }
 
 <style>
-    ﻿h2 {
-        color: #1c6758;
-        font-size: 25px;
-        font-weight: 600;
-        margin: 20px;
-    }
 
     table {
         border-collapse: collapse;
+        font-size: 16px;
+        border: solid 1px black;
+        text-align: center;
     }
 
     tr th {
         background-color: #013369;
         color: white;
-    }
-
-    table td + td {
-        border-left: 1px solid black;
+        text-align: center;
     }
 
     tr:nth-child(even) {
@@ -40,9 +34,6 @@
 {
     <h2>@Model.First().GivenName @Model.First().FamilyName's Stats</h2>
 
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
 
     <table class="table">
         <tr>
@@ -76,6 +67,10 @@ else
 {
     <h2>There are currently no stats for this player</h2>
 }
+
+<p class="btn">
+    @Html.ActionLink("Back to list", "Index")
+</p>
 
 
 

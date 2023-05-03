@@ -23,6 +23,21 @@ namespace LogicLayer
             _scheduleAccessor = scheduleAccessor;
         }
 
+        public List<int> RetrieveDistinctWeeks()
+        {
+            List<int> weekList = null;
+
+            try
+            {
+                weekList = _scheduleAccessor.SelectDistinctWeeks();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return weekList;
+        }
+
         public List<Schedule> RetrieveScheduleBySeasonIDAndWeekNumber(string seasonID, int weekNumber)
         {
             List<Schedule> scheduleList = null;

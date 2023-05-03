@@ -439,17 +439,26 @@ GO
 
 print '' print '*** Creating sp_select_schedule_by_season_and_week'
 GO
-CREATE PROCEDURE [sp_select_schedule_by_season]
+CREATE PROCEDURE [sp_select_schedule_by_season_and_week]
 	(
 		@seasonID		[nvarchar] (9),
 		@WeekNumber		[int]
 	)
 AS
 	BEGIN
-		SELECT	[gameID], [teamNameAway], [teamNameHome], [teamAwayScore], [teamHomeScore]
-				[WeekNumber], [seasonID], [OverTime], [GameDate]
+		SELECT	[gameID], [teamNameAway], [teamNameHome], [teamAwayScore], [teamHomeScore], [WeekNumber], [seasonID], [OverTime], [GameDate]
 		FROM	[teamSchedule]
 		WHERE	@seasonID = [SeasonID]
 		AND		@WeekNumber = [WeekNumber]
+	END
+GO
+
+print '' print '*** Creating sp_select_distinct_weeks'
+GO
+CREATE PROCEDURE [sp_select_distinct_weeks]
+AS
+	BEGIN
+		SELECT	DISTINCT [WeekNumber]
+		FROM	[teamSchedule]
 	END
 GO
