@@ -10,7 +10,6 @@ using MVCPresentation.Models;
 
 namespace MVCPresentation.Controllers
 {
-    [Authorize]
     public class StatsController : Controller
     {
         private IPlayerStatManager _statManager = null;
@@ -41,16 +40,11 @@ namespace MVCPresentation.Controllers
         {
             try
             {
-                if (statsModel.StatName == null)
-                {
-                    stats = _statManager.GetAllPlayerStatsByActive(true);
-                }
-                else
-                {
-                    stats = _statManager.GetAllStatsByStatName(statsModel.StatName);
-                }
+                stats = _statManager.GetAllStatsByStatNameAndOrSeasonID(statsModel.StatName, statsModel.SeasonID);
+
                 statsModel.Stats = stats;
                 ViewBag.StatName = _statsDDL;
+                ViewBag.SeasonIDs = _seasonIDsDDL;
                 
             }
             catch (Exception ex)

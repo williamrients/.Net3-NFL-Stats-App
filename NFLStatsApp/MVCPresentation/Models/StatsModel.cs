@@ -10,5 +10,6 @@ namespace MVCPresentation.Models
     {
         public IEnumerable<Stats> Stats{ get; set; }
         public string StatName { get; set; }
+        public string SeasonID { get; set; }
     }
 }

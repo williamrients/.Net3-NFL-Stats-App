@@ -5,7 +5,7 @@
 }
 
 <h2>NFL Teams</h2>
-
+<h4>Showing @Model.Count() Teams</h4>
 
 <div class="container">
     <div class="row">
@@ -15,7 +15,33 @@
                 <div class="panel panel-default">
                     <img class="panel-heading" style="max-width: 100%; height: auto;" src='https://a.espncdn.com/i/teamlogos/nfl/500/@(team.TeamAbbrivation+".png")' />
                     <h4 class="panel-body">
-                        @team.TeamCity @team.TeamName
+                        @{
+                            switch (team.TeamName)
+                            {
+                                case "Cardinals":
+                                    <text>
+                                        @team.TeamState @team.TeamName
+                                    </text>
+                                    break;
+                                case "Titans":
+                                    <text>
+                                        @team.TeamState @team.TeamName
+                                    </text>
+                                    break;
+                                case "Vikings":
+                                    <text>
+                                        @team.TeamState @team.TeamName
+                                    </text>
+                                    break;
+                                default:
+                                    <text>
+                                        @team.TeamCity @team.TeamName
+                                    </text>
+
+                                    break;
+                            }
+                        }
+
                     </h4>
                     @if (this.User.Identity.IsAuthenticated)
                     {

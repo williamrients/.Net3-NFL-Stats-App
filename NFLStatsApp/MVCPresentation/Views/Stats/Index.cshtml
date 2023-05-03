@@ -38,11 +38,14 @@
 
     SelectList selectListStatNames = new SelectList(ViewBag.StatName, "statName");
 
-    <div class="form-inline">
-        @Html.DropDownListFor(model => model.StatName, selectListStatNames, "All Stats", new { @class = "form-control col-md-4 col-md-push-8" })
+    SelectList selectListSeasons = new SelectList(ViewBag.SeasonIDs, "seasonID");
 
-        <input type="submit" value="Search" class="btn btn-primary col-md-4 col-md-push-8" style="margin-left: 10px; width: 100px" />
-    </div>
+<div class="form-inline" style="margin-right: 100px;">
+    @Html.DropDownListFor(model => model.StatName, selectListStatNames, "All Stats", new { @class = "form-control col-md-4 col-md-push-8" })
+    @Html.DropDownListFor(model => model.SeasonID, selectListSeasons, "All Seasons", new { @class = "form-control col-md-4 col-md-push-8", style = "margin-left: 10px;" })
+
+    <input type="submit" value="Search" class="btn btn-primary col-md-4 col-md-push-8" style="margin-left: 10px; width: 100px" />
+</div>
 
 }
 

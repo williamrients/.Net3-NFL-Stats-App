@@ -195,6 +195,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\PlayerAndStatsModel.cs" />
+    <Compile Include="Models\PlayerModel.cs" />
     <Compile Include="Models\ScheduleModel.cs" />
     <Compile Include="Models\StatsModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

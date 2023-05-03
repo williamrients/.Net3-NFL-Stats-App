@@ -68,13 +68,13 @@ namespace LogicLayer
             return playerStats;
         }
 
-        public List<Stats> GetAllStatsByStatName(string statName)
+        public List<Stats> GetAllStatsByStatNameAndOrSeasonID(string statName, string seasonID)
         {
             List<Stats> playerStats = null;
 
             try
             {
-                playerStats = _playerStatAccessor.SelectStatsByStatName(statName);
+                playerStats = _playerStatAccessor.SelectStatsByStatNameAndOrSeasonID(statName, seasonID);
             }
             catch (Exception ex)
             {

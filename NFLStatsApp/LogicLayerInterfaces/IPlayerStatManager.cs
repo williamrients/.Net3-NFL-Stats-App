@@ -17,6 +17,6 @@ namespace LogicLayerInterfaces
         bool RetrieveStatByPlayerIDSeasonIDAndStatName(Stats stats);
         bool EditStatByPlayerIDSeasonIDAndStatName(Stats oldStat, Stats newStat);
         Stats GetStatByPlayerIDSeasonIDAndStatName(Stats stats);
-        List<Stats> GetAllStatsByStatName(string statName);
+        List<Stats> GetAllStatsByStatNameAndOrSeasonID(string statName, string seasonID);
     }
 }

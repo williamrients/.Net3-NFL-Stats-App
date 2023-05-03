@@ -463,18 +463,38 @@ AS
 	END
 GO
 
-print '' print '*** creating sp_select_stats_by_statName'
+print '' print '*** creating sp_select_stats_by_statName_AndOr_seasonID'
 GO
-CREATE PROCEDURE [dbo].[sp_select_stats_by_statName]
+CREATE PROCEDURE [dbo].[sp_select_stats_by_statName_AndOr_seasonID]
 (
-	@statName	[nvarchar] (50)
+	@statName	[nvarchar] (50),
+	@SeasonID	[nvarchar] (9)
 )
 AS
 	BEGIN
-		SELECT	[player].[playerID], [givenName], [familyName], [active], [playerStat].[statName], [statAmount], [seasonID]
-		FROM	[player] JOIN [playerStat]
-				ON [player].[playerID] = [playerStat].[playerID]
-				JOIN [stat] ON [stat].[statName] = [playerStat].[statName]
-		WHERE	@statName = [stat].[statName]
+		IF (@statName IS NOT NULL OR @statName = '') AND (@SeasonID IS NOT NULL OR @SeasonID = '')
+			SELECT	[player].[playerID], [givenName], [familyName], [active], [playerStat].[statName], [statAmount], [seasonID]
+			FROM	[player] JOIN [playerStat]
+					ON [player].[playerID] = [playerStat].[playerID]
+					JOIN [stat] ON [stat].[statName] = [playerStat].[statName]
+			WHERE	@statName = [stat].[statName]
+			AND		@seasonID = [seasonID]
+		ELSE IF (@statName IS NOT NULL OR @statName = '') AND (@SeasonID IS NULL OR @SeasonID = '')
+			SELECT	[player].[playerID], [givenName], [familyName], [active], [playerStat].[statName], [statAmount], [seasonID]
+			FROM	[player] JOIN [playerStat]
+					ON [player].[playerID] = [playerStat].[playerID]
+					JOIN [stat] ON [stat].[statName] = [playerStat].[statName]
+			WHERE	@statName = [stat].[statName]
+		ELSE IF (@statName IS NULL OR @statName = '') AND (@SeasonID IS NOT NULL OR @SeasonID = '')
+			SELECT	[player].[playerID], [givenName], [familyName], [active], [playerStat].[statName], [statAmount], [seasonID]
+			FROM	[player] JOIN [playerStat]
+					ON [player].[playerID] = [playerStat].[playerID]
+					JOIN [stat] ON [stat].[statName] = [playerStat].[statName]
+			WHERE	@seasonID = [seasonID]
+		ELSE IF (@statName IS NULL OR @statName = '') AND (@SeasonID IS NULL OR @SeasonID = '')
+			SELECT	[player].[playerID], [givenName], [familyName], [active], [playerStat].[statName], [statAmount], [seasonID]
+			FROM	[player] JOIN [playerStat]
+					ON [player].[playerID] = [playerStat].[playerID]
+					JOIN [stat] ON [stat].[statName] = [playerStat].[statName]
 	END
 GO

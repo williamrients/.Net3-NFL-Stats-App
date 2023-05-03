@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using DataObjects;
 using LogicLayerInterfaces;
 using LogicLayer;
+using MVCPresentation.Models;
 
 namespace MVCPresentation.Controllers
 {
@@ -16,6 +17,7 @@ namespace MVCPresentation.Controllers
         private IEnumerable<Players> allPlayers;
         private IEnumerable<Players> playerList;
         private IEnumerable<String> _teamsDDL;
+        private PlayerModel playerModel = new PlayerModel();
 
         public PlayersController()
         {
@@ -33,18 +35,34 @@ namespace MVCPresentation.Controllers
         }
 
         // GET: Players
-        public ActionResult Index()
+        public ActionResult Index(PlayerModel model)
         {
             try
             {
-                allPlayers = _playerManager.GetAllPlayersByActive(true);
+                switch (model.NameSort)
+                {
+                    case NameSort.FirstAscending:
+                        allPlayers = _playerManager.GetAllPlayersByActive(true).OrderBy(p => p.GivenName).AsEnumerable();
+                        break;
+                    case NameSort.FirstDecending:
+                        allPlayers = _playerManager.GetAllPlayersByActive(true).OrderByDescending(p => p.GivenName).AsEnumerable();
+                        break;
+                    case NameSort.LastAscending:
+                        allPlayers = _playerManager.GetAllPlayersByActive(true).OrderBy(p => p.FamilyName).AsEnumerable();
+                        break;
+                    case NameSort.LastDecending:
+                        allPlayers = _playerManager.GetAllPlayersByActive(true).OrderByDescending(p => p.FamilyName).AsEnumerable();
+                        break;
+                }
+
+                model.Players = allPlayers;
             }
             catch (Exception ex)
             {
                 ViewBag.ErrorMessage = "Error retrieving players\n" + ex.Message;
                 return View("Error");
             }
-            return View(allPlayers); 
+            return View(model); 
         }
 
         // GET: Players/Details/5

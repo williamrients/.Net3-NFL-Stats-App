@@ -17,5 +17,7 @@ namespace DataObjects
         public string SeasonID { get; set; }
         public bool OverTime { get; set; }
         public DateTime GameDate { get; set; }
+        public string TeamAwayAbr { get; set; }
+        public string TeamHomeAbr { get; set; }
     }
 }

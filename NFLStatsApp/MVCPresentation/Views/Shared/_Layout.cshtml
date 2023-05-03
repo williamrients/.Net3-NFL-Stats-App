@@ -8,7 +8,11 @@
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
+
 <body>
+    <style>
+    </style>
+
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -17,17 +21,17 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("NFL Statistics App", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("NFL Statistics App", "Index", "Home", new { area = "" }, new { @class = "navbar-brand", @style="color: white;" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Teams", "Index", "Teams")</li>
-                    <li>@Html.ActionLink("Players", "Index", "Players")</li>
-                    <li>@Html.ActionLink("Stats", "Index", "Stats")</li>
-                    <li>@Html.ActionLink("Schedule", "Index", "Schedule")</li>
+                    <li>@Html.ActionLink("Teams", "Index", "Teams", new { area = "" }, new { @style = "color: white;" })</li>
+                    <li>@Html.ActionLink("Players", "Index", "Players", new { area = "" }, new { @style = "color: white;" })</li>
+                    <li>@Html.ActionLink("Stats", "Index", "Stats", new { area = "" }, new { @style = "color: white;" })</li>
+                    <li>@Html.ActionLink("Schedule", "Index", "Schedule", new { area = "" }, new { @style = "color: white;" })</li>
                     @if (User.IsInRole("Administrator"))
                     {
-                        <li>@Html.ActionLink("User Administration", "Index", "Admin")</li>
+                        <li>@Html.ActionLink("User Administration", "Index", "Admin", new { area = "" }, new { @style = "color: white;" })</li>
                     }
                 </ul>
                 @Html.Partial("_LoginPartial")
@@ -38,7 +42,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - NFL Stats App</p>
         </footer>
     </div>
 

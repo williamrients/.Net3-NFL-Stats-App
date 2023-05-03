@@ -93,8 +93,12 @@
                     <td style="text-align: right;">
                         @item.TeamNameAway
                     </td>
-                    <td style="text-align: center;">
-                        @item.TeamAwayScore @@ @item.TeamHomeScore
+                    <td style="text-align: center;" width="30%">
+                        <img src='https://a.espncdn.com/i/teamlogos/nfl/500/@(item.TeamAwayAbr+".png")' style="width: 10%; height: 5%;" />
+                        &nbsp;
+                        @item.TeamAwayScore &nbsp; @@ &nbsp; @item.TeamHomeScore
+                        &nbsp;
+                        <img src='https://a.espncdn.com/i/teamlogos/nfl/500/@(item.TeamHomeAbr+".png")' style="width: 10%; height: 5%;" />
                     </td>
                     <td style="text-align: left;">
                         @item.TeamNameHome

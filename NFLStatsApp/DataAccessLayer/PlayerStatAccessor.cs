@@ -277,20 +277,36 @@ namespace DataAccessLayer
             return playerStat;
         }
 
-        public List<Stats> SelectStatsByStatName(string statName)
+        public List<Stats> SelectStatsByStatNameAndOrSeasonID(string statName, string seasonID)
         {
             List<Stats> statList = new List<Stats>();
 
             var connectionFactory = new DBconnection();
             var conn = connectionFactory.GetConnection();
 
-            var cmdText = "sp_select_stats_by_statName";
+            var cmdText = "sp_select_stats_by_statName_AndOr_seasonID";
 
             var cmd = new SqlCommand(cmdText, conn);
 
             cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.Parameters.AddWithValue("@StatName", statName);
+            if (statName == null)
+            {
+                cmd.Parameters.AddWithValue("@StatName", DBNull.Value);
+            }
+            else
+            {
+                cmd.Parameters.AddWithValue("@StatName", statName);
+            }
+
+            if (seasonID == null)
+            {
+                cmd.Parameters.AddWithValue("@SeasonID", DBNull.Value);
+            }
+            else
+            {
+                cmd.Parameters.AddWithValue("@SeasonID", seasonID);
+            }
 
             try
             {

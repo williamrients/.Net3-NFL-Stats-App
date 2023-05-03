@@ -48,9 +48,13 @@ namespace MVCPresentation.Controllers
                 }
                 else
                 {
-                    scheduleList = _scheduleManager.RetrieveScheduleBySeasonIDAndWeekNumber(scheduleModel.SeasonID, (int)scheduleModel.WeekNumberOption);
-                }                
+                    scheduleList = _scheduleManager.RetrieveScheduleBySeasonIDAndWeekNumber(scheduleModel.SeasonID, (int)scheduleModel.WeekNumberOption);                    
+                }
+                teamAbr(scheduleList);
                 scheduleModel.schedules = scheduleList;
+
+                
+
                 ViewBag.SeasonDDL = _seasonIDsDDL;
                 ViewBag.WeekDDL = _weeksDDL;
             }
@@ -62,75 +66,220 @@ namespace MVCPresentation.Controllers
             return View(scheduleModel);
         }
 
-        // GET: Schedule/Details/5
-        public ActionResult Details(int id)
+        //Helper method for team abbreviations
+        public void teamAbr(IEnumerable<Schedule> schedule)
         {
-            return View();
-        }
-
-        // GET: Schedule/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Schedule/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
+            foreach (Schedule item in schedule)
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
+                switch (item.TeamNameAway)
+                {
+                    case "Cardinals":
+                        item.TeamAwayAbr = "ARI";
+                        break;
+                    case "Rams":
+                        item.TeamAwayAbr = "LAR";
+                        break;
+                    case "Chargers":
+                        item.TeamAwayAbr = "LAC";
+                        break;
+                    case "49ers":
+                        item.TeamAwayAbr = "SF";
+                        break;
+                    case "Broncos":
+                        item.TeamAwayAbr = "DEN";
+                        break;
+                    case "Jaguars":
+                        item.TeamAwayAbr = "JAX";
+                        break;
+                    case "Dolphins":
+                        item.TeamAwayAbr = "MIA";
+                        break;
+                    case "Buccaneers":
+                        item.TeamAwayAbr = "TB";
+                        break;
+                    case "Falcons":
+                        item.TeamAwayAbr = "ATL";
+                        break;
+                    case "Bears":
+                        item.TeamAwayAbr = "CHI";
+                        break;
+                    case "Colts":
+                        item.TeamAwayAbr = "IND";
+                        break;
+                    case "Saints":
+                        item.TeamAwayAbr = "NO";
+                        break;
+                    case "Ravens":
+                        item.TeamAwayAbr = "BAL";
+                        break;
+                    case "Commanders":
+                        item.TeamAwayAbr = "WAS";
+                        break;
+                    case "Patriots":
+                        item.TeamAwayAbr = "NE";
+                        break;
+                    case "Lions":
+                        item.TeamAwayAbr = "DET";
+                        break;
+                    case "Vikings":
+                        item.TeamAwayAbr = "MIN";
+                        break;
+                    case "Chiefs":
+                        item.TeamAwayAbr = "KC";
+                        break;
+                    case "Raiders":
+                        item.TeamAwayAbr = "LV";
+                        break;
+                    case "Giants":
+                        item.TeamAwayAbr = "NYG";
+                        break;
+                    case "Jets":
+                        item.TeamAwayAbr = "NYJ";
+                        break;
+                    case "Bills":
+                        item.TeamAwayAbr = "BUF";
+                        break;
+                    case "Panthers":
+                        item.TeamAwayAbr = "CAR";
+                        break;
+                    case "Bengals":
+                        item.TeamAwayAbr = "CIN";
+                        break;
+                    case "Browns":
+                        item.TeamAwayAbr = "CLE";
+                        break;
+                    case "Eagles":
+                        item.TeamAwayAbr = "PHI";
+                        break;
+                    case "Steelers":
+                        item.TeamAwayAbr = "PIT";
+                        break;
+                    case "Titans":
+                        item.TeamAwayAbr = "TEN";
+                        break;
+                    case "Cowboys":
+                        item.TeamAwayAbr = "DAL";
+                        break;
+                    case "Texans":
+                        item.TeamAwayAbr = "HOU";
+                        break;
+                    case "Seahawks":
+                        item.TeamAwayAbr = "SEA";
+                        break;
+                    case "Packers":
+                        item.TeamAwayAbr = "GB";
+                        break;
+                    default:
+                        item.TeamAwayAbr = "Unknown";
+                        break;
+                }
             }
-            catch
+
+
+            foreach (Schedule item in schedule)
             {
-                return View();
-            }
-        }
-
-        // GET: Schedule/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Schedule/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Schedule/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Schedule/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
+                switch (item.TeamNameHome)
+                {
+                    case "Cardinals":
+                        item.TeamHomeAbr = "ARI";
+                        break;
+                    case "Rams":
+                        item.TeamHomeAbr = "LAR";
+                        break;
+                    case "Chargers":
+                        item.TeamHomeAbr = "LAC";
+                        break;
+                    case "49ers":
+                        item.TeamHomeAbr = "SF";
+                        break;
+                    case "Broncos":
+                        item.TeamHomeAbr = "DEN";
+                        break;
+                    case "Jaguars":
+                        item.TeamHomeAbr = "JAX";
+                        break;
+                    case "Dolphins":
+                        item.TeamHomeAbr = "MIA";
+                        break;
+                    case "Buccaneers":
+                        item.TeamHomeAbr = "TB";
+                        break;
+                    case "Falcons":
+                        item.TeamHomeAbr = "ATL";
+                        break;
+                    case "Bears":
+                        item.TeamHomeAbr = "CHI";
+                        break;
+                    case "Colts":
+                        item.TeamHomeAbr = "IND";
+                        break;
+                    case "Saints":
+                        item.TeamHomeAbr = "NO";
+                        break;
+                    case "Ravens":
+                        item.TeamHomeAbr = "BAL";
+                        break;
+                    case "Commanders":
+                        item.TeamHomeAbr = "WAS";
+                        break;
+                    case "Patriots":
+                        item.TeamHomeAbr = "NE";
+                        break;
+                    case "Lions":
+                        item.TeamHomeAbr = "DET";
+                        break;
+                    case "Vikings":
+                        item.TeamHomeAbr = "MIN";
+                        break;
+                    case "Chiefs":
+                        item.TeamHomeAbr = "KC";
+                        break;
+                    case "Raiders":
+                        item.TeamHomeAbr = "LV";
+                        break;
+                    case "Giants":
+                        item.TeamHomeAbr = "NYG";
+                        break;
+                    case "Jets":
+                        item.TeamHomeAbr = "NYJ";
+                        break;
+                    case "Bills":
+                        item.TeamHomeAbr = "BUF";
+                        break;
+                    case "Panthers":
+                        item.TeamHomeAbr = "CAR";
+                        break;
+                    case "Bengals":
+                        item.TeamHomeAbr = "CIN";
+                        break;
+                    case "Browns":
+                        item.TeamHomeAbr = "CLE";
+                        break;
+                    case "Eagles":
+                        item.TeamHomeAbr = "PHI";
+                        break;
+                    case "Steelers":
+                        item.TeamHomeAbr = "PIT";
+                        break;
+                    case "Titans":
+                        item.TeamHomeAbr = "TEN";
+                        break;
+                    case "Cowboys":
+                        item.TeamHomeAbr = "DAL";
+                        break;
+                    case "Texans":
+                        item.TeamHomeAbr = "HOU";
+                        break;
+                    case "Seahawks":
+                        item.TeamHomeAbr = "SEA";
+                        break;
+                    case "Packers":
+                        item.TeamHomeAbr = "GB";
+                        break;
+                    default:
+                        item.TeamHomeAbr = "Unknown";
+                        break;
+                }
             }
         }
     }
