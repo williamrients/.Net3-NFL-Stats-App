@@ -277,6 +277,57 @@ namespace DataAccessLayer
             return playerStat;
         }
 
+        public List<Stats> SelectStatsByStatName(string statName)
+        {
+            List<Stats> statList = new List<Stats>();
+
+            var connectionFactory = new DBconnection();
+            var conn = connectionFactory.GetConnection();
+
+            var cmdText = "sp_select_stats_by_statName";
+
+            var cmd = new SqlCommand(cmdText, conn);
+
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@StatName", statName);
+
+            try
+            {
+                conn.Open();
+
+                var reader = cmd.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        Stats stats = new Stats()
+                        {
+                            PlayerID = reader.GetInt32(0),
+                            GivenName = reader.GetString(1),
+                            FamilyName = reader.GetString(2),
+                            Active = reader.GetBoolean(3),
+                            StatName = reader.GetString(4),
+                            StatAmount = reader.GetDouble(5),
+                            SeasonID = reader.GetString(6)
+                    };
+                        statList.Add(stats);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return statList;
+
+        }
+
         public int UpdateStatByPlayerIDSeasonIDAndStatName(Stats oldStat, Stats newStat)
         {
             int rows = 0;

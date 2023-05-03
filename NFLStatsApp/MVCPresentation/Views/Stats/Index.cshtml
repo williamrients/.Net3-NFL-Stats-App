@@ -1,4 +1,4 @@
-﻿@model IEnumerable<DataObjects.Stats>
+﻿@model MVCPresentation.Models.StatsModel
 
 @{
     ViewBag.Title = "Stats";
@@ -30,48 +30,69 @@
 </style>
 
 
-<h2>All Stats</h2>
-<h4>Showing @Model.Count()</h4>
+<h2>Stats</h2>
+<h4>Showing @Model.Stats.Count() Stats</h4>
+@using (Html.BeginForm("Index", "Stats", FormMethod.Get, new { @class = "" }))
+{
+    @Html.AntiForgeryToken()
 
-<table class="table">
-    <tr>
-        <th>
-            Season
-        </th>
-        <th>
-            Name
-        </th>
-        <th>
-            Stat Name
-        </th>
-        <th>
-            Amount
-        </th>
-        <th>
-            Details
-        </th>
-    </tr>
+    SelectList selectListStatNames = new SelectList(ViewBag.StatName, "statName");
 
-    @foreach (var item in Model)
-    {
+    <div class="form-inline">
+        @Html.DropDownListFor(model => model.StatName, selectListStatNames, "All Stats", new { @class = "form-control col-md-4 col-md-push-8" })
+
+        <input type="submit" value="Search" class="btn btn-primary col-md-4 col-md-push-8" style="margin-left: 10px; width: 100px" />
+    </div>
+
+}
+
+@if (Model.Stats.Count() > 0)
+{
+    <table class="table" style="margin-top: 60px;">
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.SeasonID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.GivenName) @Html.DisplayFor(modelItem => item.FamilyName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StatName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StatAmount)
-            </td>
-            <td>
-                <div class="btn btn-default" style="margin: 0 0 10px 10px;">@Html.ActionLink("Details", "Details", "Stats", new { playerID = item.PlayerID }, new { @class = "" })</div>
-            </td>
-
+            <th>
+                Season
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                Stat Name
+            </th>
+            <th>
+                Amount
+            </th>
+            <th>
+                Details
+            </th>
         </tr>
-    }
 
-</table>
+        @foreach (var item in Model.Stats)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SeasonID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GivenName) @Html.DisplayFor(modelItem => item.FamilyName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StatName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StatAmount)
+                </td>
+                <td>
+                    <div class="btn btn-default" style="margin: 0 0 10px 10px;">@Html.ActionLink("Details", "Details", "Stats", new { playerID = item.PlayerID }, new { @class = "" })</div>
+                </td>
+
+            </tr>
+        }
+
+    </table>
+}
+else
+{
+    <h2>No Stats available</h2>
+}
+

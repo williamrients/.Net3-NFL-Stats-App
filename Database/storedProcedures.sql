@@ -462,3 +462,19 @@ AS
 		FROM	[teamSchedule]
 	END
 GO
+
+print '' print '*** creating sp_select_stats_by_statName'
+GO
+CREATE PROCEDURE [dbo].[sp_select_stats_by_statName]
+(
+	@statName	[nvarchar] (50)
+)
+AS
+	BEGIN
+		SELECT	[player].[playerID], [givenName], [familyName], [active], [playerStat].[statName], [statAmount], [seasonID]
+		FROM	[player] JOIN [playerStat]
+				ON [player].[playerID] = [playerStat].[playerID]
+				JOIN [stat] ON [stat].[statName] = [playerStat].[statName]
+		WHERE	@statName = [stat].[statName]
+	END
+GO

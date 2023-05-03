@@ -16,5 +16,6 @@ namespace DataAccessLayerInterfaces
         List<string> SelectAllSeasonIDs();
         Stats SelectStatByPlayerIDSeasonIDAndStatName(Stats stats);
         int UpdateStatByPlayerIDSeasonIDAndStatName(Stats oldStat, Stats newStat);
+        List<Stats> SelectStatsByStatName(string statName);
     }
 }

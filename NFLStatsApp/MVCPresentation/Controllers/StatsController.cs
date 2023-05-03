@@ -19,6 +19,7 @@ namespace MVCPresentation.Controllers
         private IEnumerable<Stats> playerStats;
         private IEnumerable<String> _statsDDL;
         private IEnumerable<String> _seasonIDsDDL;
+        private StatsModel StatsModel = new StatsModel();
 
         public StatsController()
         {
@@ -29,26 +30,35 @@ namespace MVCPresentation.Controllers
                 _statsDDL = _statManager.RetrieveAllStatNames();
                 _seasonIDsDDL = _statManager.RetrieveAllSeasonIDs();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                // direct to error page
-                throw;
+                throw ex;
             }
         }
 
         // GET: Stats
-        public ActionResult Index()
+        public ActionResult Index(StatsModel statsModel)
         {
             try
             {
-                stats = _statManager.GetAllPlayerStatsByActive(true);
+                if (statsModel.StatName == null)
+                {
+                    stats = _statManager.GetAllPlayerStatsByActive(true);
+                }
+                else
+                {
+                    stats = _statManager.GetAllStatsByStatName(statsModel.StatName);
+                }
+                statsModel.Stats = stats;
+                ViewBag.StatName = _statsDDL;
+                
             }
             catch (Exception ex)
             {
                 ViewBag.ErrorMessage = "Error retrieving player stats\n" + ex.Message;
                 return View("Error");
             }
-            return View(stats);
+            return View(statsModel);
         }
 
         // GET: Stats/Details/5
