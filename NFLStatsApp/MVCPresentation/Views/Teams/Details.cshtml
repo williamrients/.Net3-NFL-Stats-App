@@ -4,97 +4,34 @@
     ViewBag.Title = "Team Details";
 }
 
+<style>
+    .desc {
+        color: black;
+        font-size: 25px;
+        margin-bottom: 25px;
+    }
+</style>
+
 <h2>@Model.TeamCity @Model.TeamName</h2>
 
-
-
-<dl class="dl-horizontal">
-    <dt>
-        Team Mascot:
-    </dt>
-
-    <dd>
-        @Html.DisplayFor(model => model.TeamMascot)
-    </dd>
-
-    <dt>
-        Team City:
-    </dt>
-
-    <dd>
-        @Html.DisplayFor(model => model.TeamCity)
-    </dd>
-
-    <dt>
-        Team State:
-    </dt>
-
-    <dd>
-        @Html.DisplayFor(model => model.TeamState)
-    </dd>
-
-    <dt>
-        Team Abbrivation:
-    </dt>
-
-    <dd>
-        @Html.DisplayFor(model => model.TeamAbbrivation)
-    </dd>
-</dl>
-
-<p class="btn btn-default" style="margin: 5px;">
-    @Html.ActionLink("Back to Teams", "Index")
-</p>
-
-@*<div>
-    <h4>Teams</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TeamMascot)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TeamMascot)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TeamCity)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TeamCity)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TeamState)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TeamState)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TeamAbbrivation)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TeamAbbrivation)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Active)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Active)
-        </dd>
-
-    </dl>
+<div class="container-fluid"> 
+    <div class="row">
+        <div class="col-xs-9 col-md-6">
+            <img style="width: 300px; height: 300px; float: none; " src='https://a.espncdn.com/i/teamlogos/nfl/500/@(Model.TeamAbbrivation+".png")'/>
+        </div>
+        <div class="col-xs-3 col-md-6">
+            <div class="desc">
+                Mascot: @Html.DisplayFor(model => model.TeamMascot)
+            </div>
+            <div class="desc">
+                City: @Html.DisplayFor(model => model.TeamCity)
+            </div>
+            <div class="desc">
+                State: @Html.DisplayFor(model => model.TeamState)
+            </div>
+            <div class="desc">
+                Abbrivation: @Html.DisplayFor(model => model.TeamAbbrivation)
+            </div>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>*@
