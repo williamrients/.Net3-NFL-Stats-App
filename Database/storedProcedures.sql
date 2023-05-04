@@ -498,3 +498,25 @@ AS
 					JOIN [stat] ON [stat].[statName] = [playerStat].[statName]
 	END
 GO
+
+print '' print '** creating sp_insert_new_game'
+GO
+CREATE PROCEDURE [dbo].[sp_insert_new_game]
+(
+	@teamNameAway		[nvarchar] (50),
+	@teamNameHome		[nvarchar] (50),
+	@teamAwayScore		[int],
+	@teamHomeScore		[int],
+	@WeekNumber			[int],
+	@seasonID			[nvarchar] (9),
+	@OverTime			[bit],
+	@GameDate			[datetime]
+)
+AS
+	BEGIN
+		INSERT INTO [dbo].[teamSchedule]
+			([teamNameAway], [teamNameHome], [teamAwayScore], [teamHomeScore], [WeekNumber], [seasonID], [OverTime], [GameDate])
+		VALUES
+		(@teamNameAway, @teamNameHome, @teamAwayScore, @teamHomeScore, @WeekNumber, @seasonID, @OverTime, @GameDate)
+	END
+GO

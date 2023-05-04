@@ -1,0 +1,102 @@
+﻿@model DataObjects.Schedule
+
+@{
+    ViewBag.Title = "Create";
+
+    IEnumerable<String> seasonDDL = (IEnumerable<String>)ViewBag.SeasonDDL;
+    IEnumerable<int> weekDDL = (IEnumerable<int>)ViewBag.WeeksDDL;
+    IEnumerable<String> teamDDL = (IEnumerable<String>)ViewBag.TeamsDDL;
+}
+<h2>Create</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Schedule</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">            
+            <label class="control-label col-md-2">Away Team</label>
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.TeamNameAway, new SelectList(teamDDL, "Away Team"), new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.TeamNameAway, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Home Team</label>
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.TeamNameHome, new SelectList(teamDDL, "Home Team"), new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.TeamNameHome, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Away Team Score</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TeamAwayScore, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TeamAwayScore, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Home Team Score</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TeamHomeScore, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TeamHomeScore, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Week</label>
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.WeekNumber, new SelectList(weekDDL, "Week"), new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.WeekNumber, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Season</label>
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.SeasonID, new SelectList(seasonDDL, "Season"), new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.SeasonID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.OverTime, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.OverTime)
+                    @Html.ValidationMessageFor(model => model.OverTime, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.GameDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.GameDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.GameDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

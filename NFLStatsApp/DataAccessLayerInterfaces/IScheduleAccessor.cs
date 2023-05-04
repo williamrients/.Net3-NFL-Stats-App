@@ -11,5 +11,6 @@ namespace DataAccessLayerInterfaces
     {
         List<Schedule> SelectScheduleBySeasonIDAndWeekNumber(string seasonID, int weekNumber);
         List<int> SelectDistinctWeeks();
+        int InsertNewGame(Schedule schedule);
     }
 }

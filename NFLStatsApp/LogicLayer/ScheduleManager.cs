@@ -23,6 +23,26 @@ namespace LogicLayer
             _scheduleAccessor = scheduleAccessor;
         }
 
+        public bool CreateNewGame(Schedule schedule)
+        {
+            bool success = false;
+
+            try
+            {
+                if (1 == _scheduleAccessor.InsertNewGame(schedule))
+                {
+                    success = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+
+            return success;
+        }
+
         public List<int> RetrieveDistinctWeeks()
         {
             List<int> weekList = null;

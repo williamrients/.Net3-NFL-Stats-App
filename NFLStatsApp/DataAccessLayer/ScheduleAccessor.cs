@@ -12,6 +12,46 @@ namespace DataAccessLayer
 {
     public class ScheduleAccessor : IScheduleAccessor
     {
+        public int InsertNewGame(Schedule schedule)
+        {
+            int result = 0;
+
+            var connectionFactory = new DBconnection();
+            var conn = connectionFactory.GetConnection();
+
+            var cmdText = "sp_insert_new_game";
+
+            var cmd = new SqlCommand(cmdText, conn);
+
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@teamNameAway", schedule.TeamNameAway);
+            cmd.Parameters.AddWithValue("@teamNameHome", schedule.TeamNameHome);
+            cmd.Parameters.AddWithValue("@teamAwayScore", schedule.TeamAwayScore);
+            cmd.Parameters.AddWithValue("@teamHomeScore", schedule.TeamHomeScore);
+            cmd.Parameters.AddWithValue("@WeekNumber", schedule.WeekNumber);
+            cmd.Parameters.AddWithValue("@seasonID", schedule.SeasonID);
+            cmd.Parameters.AddWithValue("@OverTime", schedule.OverTime);
+            cmd.Parameters.AddWithValue("@GameDate", schedule.GameDate);
+
+            try
+            {
+                conn.Open();
+
+                result = cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return result;
+        }
+
         public List<int> SelectDistinctWeeks()
         {
             List<int> weekList = new List<int>();

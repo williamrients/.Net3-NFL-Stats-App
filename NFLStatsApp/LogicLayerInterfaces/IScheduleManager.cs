@@ -11,5 +11,6 @@ namespace LogicLayerInterfaces
     {
         List<Schedule> RetrieveScheduleBySeasonIDAndWeekNumber(string seasonID, int weekNumber);
         List<int> RetrieveDistinctWeeks();
+        bool CreateNewGame(Schedule schedule);
     }
 }

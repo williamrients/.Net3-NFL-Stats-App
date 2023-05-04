@@ -14,20 +14,24 @@ namespace MVCPresentation.Controllers
     {
         private IScheduleManager _scheduleManager = null;
         private IPlayerStatManager _statManager = null;
+        private ITeamsManager _teamManager = null;
         private IEnumerable<Schedule> scheduleList;
         private ScheduleModel scheduleModel = new ScheduleModel();
         private IEnumerable<String> _seasonIDsDDL;
         private IEnumerable<int> _weeksDDL;
+        private IEnumerable<String> _teamsDDL;
 
         public ScheduleController()
         {
             _scheduleManager = new ScheduleManager();
             _statManager = new PlayerStatManager();
+            _teamManager = new TeamManager();
 
             try
             {
                 _seasonIDsDDL = _statManager.RetrieveAllSeasonIDs();
                 _weeksDDL = _scheduleManager.RetrieveDistinctWeeks();
+                _teamsDDL = _teamManager.RetrieveAllTeamNames();
             }
             catch (Exception ex)
             {
@@ -65,6 +69,37 @@ namespace MVCPresentation.Controllers
             }
             return View(scheduleModel);
         }
+
+        // GET: Players/Create
+        public ActionResult Create()
+        {
+            ViewBag.SeasonDDL = _seasonIDsDDL;
+            ViewBag.WeeksDDL = _weeksDDL;
+            ViewBag.TeamsDDL = _teamsDDL;
+            return View();
+        }
+
+        // POST: Schedule/Create
+        [HttpPost]
+        public ActionResult Create(Schedule schedule)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _scheduleManager.CreateNewGame(schedule);
+
+                    return RedirectToAction("Index");
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.ErrorMessage = "Error creating a new game\n" + ex.Message;
+                    return View("Error");
+                }
+            }
+            return View(schedule);
+        }
+
 
         //Helper method for team abbreviations
         public void teamAbr(IEnumerable<Schedule> schedule)
